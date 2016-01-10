@@ -1,0 +1,35 @@
+﻿<Window x:Class="AppUI.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:AppUI.Views"
+        xmlns:regions="http://prismlibrary.com/"
+        Title="App Main Window" SizeToContent="WidthAndHeight">
+
+    <!--Root shell panel-->
+    <DockPanel>
+
+        <!--Bottom status panel-->
+        <Border DockPanel.Dock="Bottom">
+            <ContentControl x:Name="StatusRegion" regions:RegionManager.RegionName="StatusRegion"/>
+        </Border>
+
+        <DockPanel DockPanel.Dock="Left">
+
+            <!--Logo panel-->
+            <Border DockPanel.Dock="Top">
+                <ContentControl x:Name="LogoRegion" regions:RegionManager.RegionName="LogoRegion"/>
+            </Border>
+
+            <!--Left helper panel-->
+            <Border>
+                <ContentControl x:Name="LeftRegion" regions:RegionManager.RegionName="LeftRegion"/>
+            </Border>
+
+        </DockPanel>
+
+        <!--Main workspace-->
+        <Border>
+            <ContentControl x:Name="MainRegion" regions:RegionManager.RegionName="MainRegion"/>
+        </Border>
+    </DockPanel>
+</Window>
