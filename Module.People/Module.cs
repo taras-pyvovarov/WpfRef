@@ -1,6 +1,8 @@
 ﻿using Microsoft.Practices.Unity;
+using Module.People.ViewModels;
 using Module.People.Views;
 using Prism.Modularity;
+using Prism.Mvvm;
 using Prism.Regions;
 
 namespace Module.People
@@ -14,6 +16,12 @@ namespace Module.People
         {
             this.container = container;
             this.regionManager = regionManager;
+
+            //container.RegisterType<LeftPanelViewModel>();
+            //ViewModelLocationProvider.SetDefaultViewModelFactory((x) =>
+            //{
+            //    return container.Resolve(x);
+            //});   
         }
 
         public void Initialize()

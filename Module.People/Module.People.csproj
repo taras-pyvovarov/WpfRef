@@ -86,6 +86,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModels\LeftPanelViewModel.cs" />
     <Compile Include="Views\BottomPanelView.xaml.cs">
       <DependentUpon>BottomPanelView.xaml</DependentUpon>
     </Compile>

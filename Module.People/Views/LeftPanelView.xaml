@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid MinHeight="100" Background="DarkBlue">
+    <Grid>
+        <ListBox ItemsSource="{Binding People}"/>
     </Grid>
 </UserControl>
