@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Prism.Mvvm;
 
 namespace Module.People.ViewModels
 {
-    public class LeftPanelViewModel : INotifyPropertyChanged
+    public class LeftPanelViewModel : BindableBase
     {
         private List<string> _people;
 
@@ -17,7 +13,7 @@ namespace Module.People.ViewModels
             private set
             {
                 _people = value;
-                RaisePropertyChanged("People");
+                OnPropertyChanged(nameof(People));
             }
         }
 
@@ -31,15 +27,6 @@ namespace Module.People.ViewModels
             people.Add("People5");
 
             People = people;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string propName)
-        {
-            var propertyChanged = PropertyChanged;
-            if (propertyChanged != null)
-                propertyChanged(this, new PropertyChangedEventArgs(propName));
         }
     }
 }

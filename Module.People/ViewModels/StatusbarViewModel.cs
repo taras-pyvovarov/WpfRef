@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Prism.Mvvm;
 
 namespace Module.People.ViewModels
 {
-    public class StatusbarViewModel : INotifyPropertyChanged
+    public class StatusbarViewModel : BindableBase
     {
         private string _status;
 
@@ -17,17 +12,13 @@ namespace Module.People.ViewModels
             private set
             {
                 _status = value;
-                RaisePropertyChanged("Status");
+                OnPropertyChanged(nameof(Status));
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string propName)
+        public StatusbarViewModel()
         {
-            var propertyChanged = PropertyChanged;
-            if (propertyChanged != null)
-                propertyChanged(this, new PropertyChangedEventArgs(propName));
+            Status = Properties.Resources.Statusbar_DefaultText;
         }
     }
 }

@@ -1,8 +1,9 @@
-﻿<Window x:Class="AppUI.Views.ShellView"
+﻿<Window x:Class="Shell.Views.ShellView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:AppUI.Views"
+        xmlns:local="clr-namespace:Shell.Views"
         xmlns:prism="http://prismlibrary.com/"
+        xmlns:common="clr-namespace:Common;assembly=Common"
         Title="App Main Window" SizeToContent="WidthAndHeight">
 
     <!--Root shell panel-->
@@ -10,26 +11,26 @@
 
         <!--Bottom status panel-->
         <Border DockPanel.Dock="Bottom">
-            <ContentControl prism:RegionManager.RegionName="StatusRegion"/>
+            <ContentControl prism:RegionManager.RegionName="{x:Static common:AppConstants.StatusRegion}"/>
         </Border>
 
         <DockPanel DockPanel.Dock="Left">
 
             <!--Logo panel-->
             <Border DockPanel.Dock="Top">
-                <ContentControl prism:RegionManager.RegionName="LogoRegion"/>
+                <ContentControl prism:RegionManager.RegionName="{x:Static common:AppConstants.LogoRegion}"/>
             </Border>
 
             <!--Left helper panel-->
             <Border>
-                <ContentControl prism:RegionManager.RegionName="LeftRegion"/>
+                <ContentControl prism:RegionManager.RegionName="{x:Static common:AppConstants.LeftRegion}"/>
             </Border>
 
         </DockPanel>
 
         <!--Main workspace-->
         <Border>
-            <ContentControl prism:RegionManager.RegionName="MainRegion"/>
+            <ContentControl prism:RegionManager.RegionName="{x:Static common:AppConstants.MainRegion}"/>
         </Border>
     </DockPanel>
 </Window>

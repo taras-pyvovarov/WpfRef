@@ -8,8 +8,8 @@
     <ProjectGuid>{331BEF56-36CB-47B9-864F-FAD5C47CF611}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AppUI</RootNamespace>
-    <AssemblyName>AppUI</AssemblyName>
+    <RootNamespace>Shell</RootNamespace>
+    <AssemblyName>Shell</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -134,6 +134,10 @@
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{f5ca24e5-3c9e-4396-99e9-a374e280dc78}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Module.People\Module.People.csproj">
       <Project>{3d2d932c-11d6-4109-98e5-f1117b533bad}</Project>
       <Name>Module.People</Name>

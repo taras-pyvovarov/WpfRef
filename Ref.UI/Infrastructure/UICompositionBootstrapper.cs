@@ -1,9 +1,9 @@
 ﻿using System.Windows;
-using AppUI.Views;
+using Shell.Views;
 using Prism.Modularity;
 using Prism.Unity;
 
-namespace AppUI
+namespace Shell
 {
     internal class UICompositionBootstrapper : UnityBootstrapper
     {
