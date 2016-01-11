@@ -17,11 +17,19 @@ namespace Module.People
             this.container = container;
             this.regionManager = regionManager;
 
+            ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(x =>
+            {
+                if (x == typeof(BottomPanelView))
+                    return typeof(StatusbarViewModel);
+
+                return null;
+            });
+
             //container.RegisterType<LeftPanelViewModel>();
             //ViewModelLocationProvider.SetDefaultViewModelFactory((x) =>
             //{
             //    return container.Resolve(x);
-            //});   
+            //}); 
         }
 
         public void Initialize()
