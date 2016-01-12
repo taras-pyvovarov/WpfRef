@@ -5,15 +5,10 @@ namespace Module.People.ViewModels
     public class StatusbarViewModel : BindableBase
     {
         private string _status;
-
         public string Status
         {
             get { return _status; }
-            private set
-            {
-                _status = value;
-                OnPropertyChanged(nameof(Status));
-            }
+            private set { SetProperty(ref this._status, value); }
         }
 
         public StatusbarViewModel()

@@ -37,6 +37,8 @@ namespace Module.People
                 return typeof(StatusbarViewModel);
             if (viewType == typeof(LeftPanelView))
                 return typeof(LeftPanelViewModel);
+            if (viewType == typeof(MainPanelView))
+                return typeof(MainPanelViewModel);
             return null;
         }
     }

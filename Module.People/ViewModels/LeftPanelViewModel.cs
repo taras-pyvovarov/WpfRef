@@ -6,15 +6,10 @@ namespace Module.People.ViewModels
     public class LeftPanelViewModel : BindableBase
     {
         private List<string> _people;
-
         public List<string> People
         {
             get { return _people; }
-            private set
-            {
-                _people = value;
-                OnPropertyChanged(nameof(People));
-            }
+            private set { SetProperty(ref this._people, value); }
         }
 
         public LeftPanelViewModel()

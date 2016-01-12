@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModels\LeftPanelViewModel.cs" />
+    <Compile Include="ViewModels\MainPanelViewModel.cs" />
     <Compile Include="ViewModels\StatusbarViewModel.cs" />
     <Compile Include="Views\BottomPanelView.xaml.cs">
       <DependentUpon>BottomPanelView.xaml</DependentUpon>
