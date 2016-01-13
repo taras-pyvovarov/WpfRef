@@ -8,6 +8,6 @@ namespace Common.Interfaces
 {
     public interface IWindowService
     {
-        void ShowDialog(object viewModel);
+        void ShowDialog(object viewModel, Dictionary<Type, Type> viewViewModelBindings);
     }
 }

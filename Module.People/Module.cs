@@ -6,6 +6,7 @@ using Module.People.Views;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
+using System.Collections.Generic;
 
 namespace Module.People
 {
@@ -24,6 +25,9 @@ namespace Module.People
 
         public void Initialize()
         {
+            Dictionary<Type, Type> viewViewModelBindings = CreateViewViewModelBindings();
+            container.RegisterInstance<Dictionary<Type, Type>>(viewViewModelBindings);
+
             // View will be automatically injected to the region when the region is first displayed.
             this.regionManager.RegisterViewWithRegion(AppConstants.LogoRegion, () => this.container.Resolve<LogoView>());
             this.regionManager.RegisterViewWithRegion(AppConstants.LeftRegion, () => this.container.Resolve<LeftPanelView>());
@@ -33,13 +37,24 @@ namespace Module.People
 
         private Type GetViewModelForView(Type viewType)
         {
-            if (viewType == typeof(BottomPanelView))
-                return typeof(StatusbarViewModel);
-            if (viewType == typeof(LeftPanelView))
-                return typeof(LeftPanelViewModel);
-            if (viewType == typeof(MainPanelView))
-                return typeof(MainPanelViewModel);
-            return null;
+            var bindings = container.Resolve<Dictionary<Type, Type>>();
+            var viewModelType = bindings[viewType];
+            return viewModelType;
+        }
+
+        private Dictionary<Type, Type> CreateViewViewModelBindings()
+        {
+            Dictionary<Type, Type> viewViewModelBindings = new Dictionary<Type, Type>();
+
+            //Region views:
+            viewViewModelBindings.Add(typeof(BottomPanelView), typeof(StatusbarViewModel));
+            viewViewModelBindings.Add(typeof(LeftPanelView), typeof(LeftPanelViewModel));
+            viewViewModelBindings.Add(typeof(MainPanelView), typeof(MainPanelViewModel));
+
+            //Other views:
+            viewViewModelBindings.Add(typeof(ActionPanelView), typeof(ActionPanelViewModel));
+
+            return viewViewModelBindings;
         }
     }
 }

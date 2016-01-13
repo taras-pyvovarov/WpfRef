@@ -70,7 +70,7 @@ namespace Module.People.ViewModels
         private void DialogExecute()
         {
             IWindowService windowService = _container.Resolve<IWindowService>();
-            windowService.ShowDialog(new ActionPanelViewModel());
+            windowService.ShowDialog(new ActionPanelViewModel(), _container.Resolve<Dictionary<Type, Type>>());
         }
 
         #endregion Command executes

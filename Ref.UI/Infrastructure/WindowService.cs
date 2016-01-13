@@ -13,16 +13,20 @@ namespace Shell
 {
     public class WindowService : IWindowService
     {
-        public void ShowDialog(object viewModel)
+        public void ShowDialog(object viewModel, Dictionary<Type, Type> viewViewModelBindings)
         {
             Window window = new Window();
+            window.SizeToContent = SizeToContent.WidthAndHeight;
 
-            DataTemplate dt = new DataTemplate();
-            dt.DataType = viewModel.GetType();
-            FrameworkElementFactory fef = new FrameworkElementFactory(typeof(ActionPanelView));
-            dt.VisualTree = fef;
-            DataTemplateKey dtKey = new DataTemplateKey(viewModel.GetType());
-            window.Resources.Add(dtKey, dt);
+            foreach (var singleBinding in viewViewModelBindings)
+            {
+                DataTemplate dt = new DataTemplate();
+                dt.DataType = singleBinding.Value;
+                FrameworkElementFactory fef = new FrameworkElementFactory(singleBinding.Key);
+                dt.VisualTree = fef;
+                DataTemplateKey dtKey = new DataTemplateKey(singleBinding.Value);
+                window.Resources.Add(dtKey, dt);
+            }
 
             window.Content = viewModel;
             window.ShowDialog();
