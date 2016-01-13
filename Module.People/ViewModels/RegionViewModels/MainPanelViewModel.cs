@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using Common.Interfaces;
+using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+
+using Microsoft.Practices.Unity;
+using Module.People.ViewModels;
+using Module.People.Views;
+using Prism.Modularity;
+using Prism.Mvvm;
+using Prism.Regions;
 
 namespace Module.People.ViewModels
 {
@@ -26,10 +34,18 @@ namespace Module.People.ViewModels
             set { SetProperty(ref _blankLongAsyncCommand, value); }
         }
 
+        public ICommand _dialogCommand;
+        public ICommand DialogCommand
+        {
+            get { return _dialogCommand; }
+            set { SetProperty(ref _dialogCommand, value); }
+        }
+
         public MainPanelViewModel()
         {
             BlankLongCommand = new DelegateCommand(BlankLongExecute);
             BlankLongAsyncCommand = DelegateCommand.FromAsyncHandler(BlankLongAsyncExecute);
+            DialogCommand = new DelegateCommand(DialogExecute);
         }
 
         private void BlankLongExecute()
@@ -40,6 +56,12 @@ namespace Module.People.ViewModels
         private async Task BlankLongAsyncExecute()
         {
             await Task.Run(new Action(HeavyOperation));
+        }
+
+        private void DialogExecute()
+        {
+            IWindowService windowService = Module.TempContainer.Resolve<IWindowService>();
+            windowService.ShowDialog(new ActionPanelViewModel());
         }
 
         private void HeavyOperation()

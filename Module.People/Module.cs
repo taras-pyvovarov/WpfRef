@@ -14,9 +14,12 @@ namespace Module.People
         private readonly IUnityContainer container;
         private readonly IRegionManager regionManager;
 
+        public static IUnityContainer TempContainer;
+
         public Module(IUnityContainer container, IRegionManager regionManager)
         {
             this.container = container;
+            TempContainer = container;
             this.regionManager = regionManager;
 
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(x => GetViewModelForView(x));

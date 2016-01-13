@@ -86,19 +86,23 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModels\LeftPanelViewModel.cs" />
-    <Compile Include="ViewModels\MainPanelViewModel.cs" />
-    <Compile Include="ViewModels\StatusbarViewModel.cs" />
-    <Compile Include="Views\BottomPanelView.xaml.cs">
+    <Compile Include="ViewModels\ActionPanelViewModel.cs" />
+    <Compile Include="ViewModels\RegionViewModels\LeftPanelViewModel.cs" />
+    <Compile Include="ViewModels\RegionViewModels\MainPanelViewModel.cs" />
+    <Compile Include="ViewModels\RegionViewModels\StatusbarViewModel.cs" />
+    <Compile Include="Views\ActionPanelView.xaml.cs">
+      <DependentUpon>ActionPanelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegionViews\BottomPanelView.xaml.cs">
       <DependentUpon>BottomPanelView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LeftPanelView.xaml.cs">
+    <Compile Include="Views\RegionViews\LeftPanelView.xaml.cs">
       <DependentUpon>LeftPanelView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LogoView.xaml.cs">
+    <Compile Include="Views\RegionViews\LogoView.xaml.cs">
       <DependentUpon>LogoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainPanelView.xaml.cs">
+    <Compile Include="Views\RegionViews\MainPanelView.xaml.cs">
       <DependentUpon>MainPanelView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -131,19 +135,23 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\BottomPanelView.xaml">
+    <Page Include="Views\ActionPanelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LeftPanelView.xaml">
+    <Page Include="Views\RegionViews\BottomPanelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LogoView.xaml">
+    <Page Include="Views\RegionViews\LeftPanelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainPanelView.xaml">
+    <Page Include="Views\RegionViews\LogoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegionViews\MainPanelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

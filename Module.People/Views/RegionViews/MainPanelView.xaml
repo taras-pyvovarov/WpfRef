@@ -2,7 +2,19 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
-             prism:ViewModelLocator.AutoWireViewModel="True">
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:views="clr-namespace:Module.People.Views"
+             xmlns:viewModels="clr-namespace:Module.People.ViewModels">
+
+    <UserControl.Resources>
+
+        <!--Binding Action panel view to its viewmodel-->
+        <DataTemplate DataType="{x:Type viewModels:ActionPanelViewModel}">
+            <views:ActionPanelView />
+        </DataTemplate>
+
+    </UserControl.Resources>
+
     <DockPanel>
         
         <!--Bottom panel-->
@@ -10,6 +22,7 @@
             
             <!--Right bottom panel-->
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <Button Content="Create dialog handler" Command="{Binding DialogCommand}"/>
                 <Button Content="Blank long handler" Command="{Binding BlankLongCommand}"/>
                 <Button Content="Blank long async handler" Command="{Binding BlankLongAsyncCommand}"/>
             </StackPanel>
@@ -21,6 +34,13 @@
         
         <!--Main panel-->
         <DockPanel>
+            
+            <!--Showing view needed for the action panel viewmodel-->
+            <ContentPresenter>
+                <ContentPresenter.Content>
+                    <viewModels:ActionPanelViewModel />
+                </ContentPresenter.Content>
+            </ContentPresenter>
         </DockPanel>
     </DockPanel>
 </UserControl>
