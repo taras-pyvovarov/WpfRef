@@ -24,10 +24,6 @@ namespace Shell
             DataTemplateKey dtKey = new DataTemplateKey(viewModel.GetType());
             window.Resources.Add(dtKey, dt);
 
-            //ContentPresenter contentPresenter = new ContentPresenter();
-            //contentPresenter.Content = viewModel;
-            //window.Content = contentPresenter;
-
             window.Content = viewModel;
             window.ShowDialog();
         }

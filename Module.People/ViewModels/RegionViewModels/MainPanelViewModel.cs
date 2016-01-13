@@ -13,13 +13,16 @@ using Microsoft.Practices.Unity;
 using Module.People.ViewModels;
 using Module.People.Views;
 using Prism.Modularity;
-using Prism.Mvvm;
 using Prism.Regions;
 
 namespace Module.People.ViewModels
 {
     public class MainPanelViewModel : BindableBase
     {
+        private IUnityContainer _container;
+
+        #region Commands
+
         public ICommand _blankLongCommand;
         public ICommand BlankLongCommand
         {
@@ -41,12 +44,18 @@ namespace Module.People.ViewModels
             set { SetProperty(ref _dialogCommand, value); }
         }
 
-        public MainPanelViewModel()
+        #endregion Commands
+
+        public MainPanelViewModel(IUnityContainer container)
         {
+            _container = container;
+
             BlankLongCommand = new DelegateCommand(BlankLongExecute);
             BlankLongAsyncCommand = DelegateCommand.FromAsyncHandler(BlankLongAsyncExecute);
             DialogCommand = new DelegateCommand(DialogExecute);
         }
+
+        #region Command executes
 
         private void BlankLongExecute()
         {
@@ -60,9 +69,11 @@ namespace Module.People.ViewModels
 
         private void DialogExecute()
         {
-            IWindowService windowService = Module.TempContainer.Resolve<IWindowService>();
+            IWindowService windowService = _container.Resolve<IWindowService>();
             windowService.ShowDialog(new ActionPanelViewModel());
         }
+
+        #endregion Command executes
 
         private void HeavyOperation()
         {
