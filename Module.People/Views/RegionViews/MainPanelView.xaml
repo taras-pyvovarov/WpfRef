@@ -27,7 +27,7 @@
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <!-- This action will invoke the selected command in the view model and pass the parameters of the event to it. -->
-                            <prism:InvokeCommandAction Command="{Binding PassEventParamsCommand}"/>
+                            <prism:InvokeCommandAction Command="{Binding PassEventParamsCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=InvokeParameter}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>

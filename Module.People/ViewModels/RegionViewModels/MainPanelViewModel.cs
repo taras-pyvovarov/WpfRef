@@ -68,7 +68,7 @@ namespace Module.People.ViewModels
             BlankLongCommand = new DelegateCommand(BlankLongExecute);
             BlankLongAsyncCommand = DelegateCommand.FromAsyncHandler(BlankLongAsyncExecute);
             DialogCommand = new DelegateCommand(DialogExecute);
-            PassEventParamsCommand = new DelegateCommand(PassEventParamsExecute);
+            PassEventParamsCommand = new DelegateCommand<EventArgs>(PassEventParamsExecute);
         }
 
         #region Command executes
@@ -89,7 +89,7 @@ namespace Module.People.ViewModels
             windowService.ShowDialog(new ActionPanelViewModel(), _container.Resolve<Dictionary<Type, Type>>());
         }
 
-        private void PassEventParamsExecute()
+        private void PassEventParamsExecute(EventArgs args)
         {
             
         }
