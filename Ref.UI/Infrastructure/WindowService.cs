@@ -1,23 +1,36 @@
-﻿using Common.Interfaces;
-using Module.People.ViewModels;
-using Module.People.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
+using Common.Interfaces;
+using Microsoft.Practices.Unity;
 
 namespace Shell
 {
     public class WindowService : IWindowService
     {
-        public void ShowDialog(object viewModel, Dictionary<Type, Type> viewViewModelBindings)
+        private Window owner;
+        private Dictionary<Type, Type> viewViewModelBindings;
+
+        public WindowService(IUnityContainer container)
+        {
+            viewViewModelBindings = container.Resolve<Dictionary<Type, Type>>();
+            owner = container.Resolve<Window>();
+        }
+
+        public void ShowDialog(object viewModel)
         {
             Window window = new Window();
+            AddWindowBindings(window, viewViewModelBindings);
             window.SizeToContent = SizeToContent.WidthAndHeight;
+            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            window.Owner = owner;
 
+            window.Content = viewModel;
+            window.ShowDialog();
+        }
+
+        private void AddWindowBindings(Window window, Dictionary<Type, Type> viewViewModelBindings)
+        {
             foreach (var singleBinding in viewViewModelBindings)
             {
                 DataTemplate dt = new DataTemplate();
@@ -27,9 +40,6 @@ namespace Shell
                 DataTemplateKey dtKey = new DataTemplateKey(singleBinding.Value);
                 window.Resources.Add(dtKey, dt);
             }
-
-            window.Content = viewModel;
-            window.ShowDialog();
         }
     }
 }

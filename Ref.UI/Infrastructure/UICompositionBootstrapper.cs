@@ -19,10 +19,6 @@ namespace Shell
 
         protected override DependencyObject CreateShell()
         {
-            //var a = new LifetimeManager();
-            //this.Container.RegisterInstance(typeof(IWindowService), "taras", new WindowService(), );
-            this.Container.RegisterInstance<IWindowService>(new WindowService());
-
             // Use the container to create an instance of the shell.
             ShellView view = this.Container.TryResolve<ShellView>();
             return view;
@@ -32,6 +28,10 @@ namespace Shell
         {
             base.InitializeShell();
             App.Current.MainWindow = (Window)this.Shell;
+
+            this.Container.RegisterType<IWindowService, WindowService>();
+            this.Container.RegisterInstance<Window>((Window)this.Shell);
+
             App.Current.MainWindow.Show();
         }
     }

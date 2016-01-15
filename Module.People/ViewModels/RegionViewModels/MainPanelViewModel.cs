@@ -86,7 +86,8 @@ namespace Module.People.ViewModels
         private void DialogExecute()
         {
             IWindowService windowService = _container.Resolve<IWindowService>();
-            windowService.ShowDialog(new ActionPanelViewModel(), _container.Resolve<Dictionary<Type, Type>>());
+            //windowService.SetViewViewModelBindings(_container.Resolve<Dictionary<Type, Type>>());
+            windowService.ShowDialog(new ActionPanelViewModel());
         }
 
         private void PassEventParamsExecute(EventArgs args)
