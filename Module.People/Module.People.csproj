@@ -86,12 +86,16 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModels\ActionPanelViewModel.cs" />
+    <Compile Include="ViewModels\EditPersonViewModel.cs" />
+    <Compile Include="ViewModels\PersonViewModel.cs" />
     <Compile Include="ViewModels\RegionViewModels\LeftPanelViewModel.cs" />
     <Compile Include="ViewModels\RegionViewModels\MainPanelViewModel.cs" />
     <Compile Include="ViewModels\RegionViewModels\StatusbarViewModel.cs" />
-    <Compile Include="Views\ActionPanelView.xaml.cs">
-      <DependentUpon>ActionPanelView.xaml</DependentUpon>
+    <Compile Include="Views\EditPersonView.xaml.cs">
+      <DependentUpon>EditPersonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShowPersonView.xaml.cs">
+      <DependentUpon>ShowPersonView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegionViews\BottomPanelView.xaml.cs">
       <DependentUpon>BottomPanelView.xaml</DependentUpon>
@@ -135,7 +139,11 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\ActionPanelView.xaml">
+    <Page Include="Views\EditPersonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowPersonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,6 +168,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{f5ca24e5-3c9e-4396-99e9-a374e280dc78}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\People.Domain\People.Domain.csproj">
+      <Project>{55d830f0-35ce-48be-b1a4-742df2d698f1}</Project>
+      <Name>People.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

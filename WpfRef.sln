@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.People", "Module.Peo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{F5CA24E5-3C9E-4396-99E9-A374E280DC78}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domains", "Domains", "{07906D9F-87BE-4CAF-9D09-11EA10F50721}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "People.Domain", "People.Domain\People.Domain.csproj", "{55D830F0-35CE-48BE-B1A4-742DF2D698F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,11 +33,16 @@ Global
 		{F5CA24E5-3C9E-4396-99E9-A374E280DC78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5CA24E5-3C9E-4396-99E9-A374E280DC78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5CA24E5-3C9E-4396-99E9-A374E280DC78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55D830F0-35CE-48BE-B1A4-742DF2D698F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55D830F0-35CE-48BE-B1A4-742DF2D698F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55D830F0-35CE-48BE-B1A4-742DF2D698F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55D830F0-35CE-48BE-B1A4-742DF2D698F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3D2D932C-11D6-4109-98E5-F1117B533BAD} = {938DE7BA-7AEB-46AE-A302-EFC25C6A4712}
+		{55D830F0-35CE-48BE-B1A4-742DF2D698F1} = {07906D9F-87BE-4CAF-9D09-11EA10F50721}
 	EndGlobalSection
 EndGlobal

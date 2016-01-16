@@ -10,8 +10,8 @@
     <UserControl.Resources>
 
         <!--Binding Action panel view to its viewmodel-->
-        <DataTemplate DataType="{x:Type viewModels:ActionPanelViewModel}">
-            <views:ActionPanelView />
+        <DataTemplate DataType="{x:Type viewModels:PersonViewModel}">
+            <views:ShowPersonView />
         </DataTemplate>
 
     </UserControl.Resources>
@@ -23,17 +23,16 @@
             
             <!--Right bottom panel-->
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                <Button Content="Pass EventArgs handler">
+                <Button Content="Pass EventArgs">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <!-- This action will invoke the selected command in the view model and pass the parameters of the event to it. -->
                             <prism:InvokeCommandAction Command="{Binding PassEventParamsCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=InvokeParameter}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
-                <Button Content="Create dialog handler" Command="{Binding DialogCommand}"/>
-                <Button Content="Blank long handler" Command="{Binding BlankLongCommand}"/>
-                <Button Content="Blank long async handler" Command="{Binding BlankLongAsyncCommand}"/>
+                
+                <Button Content="Blank long" Command="{Binding BlankLongCommand}"/>
+                <Button Content="Blank long async" Command="{Binding BlankLongAsyncCommand}"/>
             </StackPanel>
             
             <!--Main bottom panel-->
@@ -49,12 +48,16 @@
                 <TextBox Text="{Binding ValidatedText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
             </DockPanel>
             
-            <!--Showing view needed for the action panel viewmodel-->
-            <ContentPresenter>
-                <ContentPresenter.Content>
-                    <viewModels:ActionPanelViewModel />
-                </ContentPresenter.Content>
-            </ContentPresenter>
+            <!--Showing view needed for needed viewmodel-->
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Show in dialog" Command="{Binding ShowPersonDialogCommand}"/>
+                    <Button Content="Edit person" Command="{Binding EditPersonDialogCommand}"/>
+                </StackPanel>
+                
+                <ContentPresenter Content="{Binding SelectedPersonViewModel}"/>
+            </DockPanel>
+            
         </DockPanel>
     </DockPanel>
 </UserControl>
