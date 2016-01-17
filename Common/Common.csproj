@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConstants.cs" />
+    <Compile Include="Interfaces\IValidationService.cs" />
     <Compile Include="Interfaces\IWindowService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

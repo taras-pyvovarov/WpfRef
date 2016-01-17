@@ -53,6 +53,11 @@ namespace Module.People.ViewModels
 
         #endregion Commands
 
+        public PersonViewModel SelectedPersonViewModel
+        {
+            get { return new PersonViewModel(new Person("Name1", "Lastname1", "7658675")); }
+        }
+
         public MainPanelViewModel(IUnityContainer container)
         {
             _container = container;
@@ -76,7 +81,8 @@ namespace Module.People.ViewModels
         private void EditPersonDialogExecute()
         {
             IWindowService windowService = _container.Resolve<IWindowService>();
-            var editPersonViewModel = new EditPersonViewModel(new Person("Name1", "Lastname1", "7658675"));
+            IValidationService validationService = _container.Resolve<IValidationService>();
+            var editPersonViewModel = new EditPersonViewModel(new Person("Name1", "Lastname1", "7658675"), validationService);
             windowService.ShowDialog(editPersonViewModel);
         }
 

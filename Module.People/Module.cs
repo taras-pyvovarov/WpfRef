@@ -7,6 +7,8 @@ using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
 using System.Collections.Generic;
+using Common.Interfaces;
+using People.Domain;
 
 namespace Module.People
 {
@@ -27,6 +29,7 @@ namespace Module.People
         {
             Dictionary<Type, Type> viewViewModelBindings = CreateViewViewModelBindings();
             container.RegisterInstance<Dictionary<Type, Type>>(viewViewModelBindings);
+            container.RegisterType<IValidationService, ValidationService>();
 
             // View will be automatically injected to the region when the region is first displayed.
             this.regionManager.RegisterViewWithRegion(AppConstants.LogoRegion, () => this.container.Resolve<LogoView>());

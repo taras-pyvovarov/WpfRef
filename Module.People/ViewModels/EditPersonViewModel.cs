@@ -1,98 +1,95 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading.Tasks;
+using Common.Interfaces;
 using People.Domain;
+using Prism.Mvvm;
 
 namespace Module.People.ViewModels
 {
-    public class EditPersonViewModel : PersonViewModel, IDataErrorInfo
+    public class EditPersonViewModel : BindableBase, INotifyDataErrorInfo
     {
-        public EditPersonViewModel(Person personModel) : base(personModel)
-        {
-        }
+        private readonly Dictionary<string, string[]> _validationErrors = new Dictionary<string, string[]>();
+        private readonly IValidationService _validationService;
 
-        #region Validation
-
-        private string Validate(string propertyName)
+        private string _firstname;
+        public string Firstname
         {
-            // Return error message if there is error on else return empty or null string
-            string validationMessage = null;
-            switch (propertyName)
+            get { return _firstname; }
+            set
             {
-                case nameof(Firstname):
-                    if (ValidateFirstname())
-                        return null;
-                    validationMessage = "Firstname is incorrect";
-                    break;
-                case nameof(Lastname):
-                    if (ValidateLastname())
-                        return null;
-                    validationMessage = "Lastname is incorrect";
-                    break;
-                case nameof(ValidatePhoneNumber):
-                    if (ValidateFirstname())
-                        return null;
-                    validationMessage = "Phone number is incorrect";
-                    break;
+                SetProperty(ref this._firstname, value);
+                ValidateValueAsync(nameof(Firstname), () => _validationService.ValidateName(value));
             }
-
-            return validationMessage;
         }
 
-        private bool ValidateFirstname()
+        private string _lastname;
+        public string Lastname
         {
-            if (string.IsNullOrEmpty(Firstname))
-                return true;
-
-            foreach (var singleChar in Firstname)
+            get { return _lastname; }
+            set
             {
-                if (singleChar < '1' || singleChar > '9')
-                    return false;
+                SetProperty(ref this._lastname, value);
+                ValidateValueAsync(nameof(Lastname), () => _validationService.ValidateName(value));
             }
-
-            return true;
         }
 
-        private bool ValidateLastname()
+        private string _phoneNumber;
+        public string PhoneNumber
         {
-            if (string.IsNullOrEmpty(Firstname))
-                return true;
-
-            foreach (var singleChar in Firstname)
+            get { return _phoneNumber; }
+            set
             {
-                if (singleChar < '1' || singleChar > '9')
-                    return false;
+                SetProperty(ref this._phoneNumber, value);
+                ValidateValueAsync(nameof(PhoneNumber), () => _validationService.ValidatePhoneNumber(value));
             }
-
-            return true;
         }
 
-        private bool ValidatePhoneNumber()
+        public EditPersonViewModel(Person personModel, IValidationService validationService)
         {
-            if (string.IsNullOrEmpty(Firstname))
-                return true;
+            _validationService = validationService;
 
-            foreach (var singleChar in Firstname)
-            {
-                if (singleChar < '1' || singleChar > '9')
-                    return false;
-            }
-
-            return true;
+            Firstname = personModel.Firstname;
+            Lastname = personModel.Lastname;
+            PhoneNumber = personModel.PhoneNumber;
         }
 
-        #endregion Validation
-
-        #region IDataErrorInfo implementation
-
-        public string Error
+        private async void ValidateValueAsync(string validatedPropertyName, Func<string[]> validationMethod)
         {
-            get { return "Error"; }
+            //bool isValid = await Task<bool>.Run(() => { return _validationService.ValidatePhoneNumber(nameToValidate, out validationErrors); }).ConfigureAwait(false);
+            string[] validationResult = await Task<string[]>.Run(validationMethod).ConfigureAwait(false);
+
+            if (validationResult.Length > 0)
+                _validationErrors[validatedPropertyName] = validationResult;
+            else if (_validationErrors.ContainsKey(validatedPropertyName))
+                _validationErrors.Remove(validatedPropertyName);
+            RaiseErrorsChanged(validatedPropertyName);
         }
 
-        public string this[string columnName]
+        #region INotifyDataErrorInfo implementation
+
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+        private void RaiseErrorsChanged(string propertyName)
         {
-            get { return Validate(columnName); }
+            if (ErrorsChanged != null)
+                ErrorsChanged(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        #endregion IDataErrorInfo implementation
+        public IEnumerable GetErrors(string propertyName)
+        {
+            if (string.IsNullOrEmpty(propertyName) || !_validationErrors.ContainsKey(propertyName))
+                return null;
+
+            return _validationErrors[propertyName];
+        }
+
+        public bool HasErrors
+        {
+            get { return _validationErrors.Count > 0; }
+        }
+
+        #endregion INotifyDataErrorInfo implementation
     }
 }
