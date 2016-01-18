@@ -1,6 +1,8 @@
 ﻿<UserControl x:Class="Module.People.Views.EditPersonView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:commonUI="clr-namespace:Presentation;assembly=Presentation"
+             commonUI:DialogCloser.DialogResult="{Binding DialogResult}">
 
     <UserControl.Resources>
         <ControlTemplate x:Key="ValidationTemplate">

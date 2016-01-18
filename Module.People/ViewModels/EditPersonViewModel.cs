@@ -61,6 +61,13 @@ namespace Module.People.ViewModels
             }
         }
 
+        private bool? _dialogResult;
+        public bool? DialogResult
+        {
+            get { return _dialogResult; }
+            set { SetProperty(ref this._dialogResult, value); }
+        }
+
         public EditPersonViewModel(Person personModel, IValidationService validationService)
         {
             ApplyEditCommand = new DelegateCommand(ApplyEditExecute);
@@ -80,6 +87,8 @@ namespace Module.People.ViewModels
             editingPerson.Firstname = Firstname;
             editingPerson.Lastname = Lastname;
             editingPerson.PhoneNumber = PhoneNumber;
+
+            DialogResult = true;
         }
 
         #endregion Command executes

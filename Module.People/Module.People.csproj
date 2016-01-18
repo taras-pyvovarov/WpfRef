@@ -165,6 +165,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common.UI\Presentation.csproj">
+      <Project>{bd496f3b-178e-491a-8f59-ddc09fa0a5dd}</Project>
+      <Name>Presentation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{f5ca24e5-3c9e-4396-99e9-a374e280dc78}</Project>
       <Name>Common</Name>
