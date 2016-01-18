@@ -2,9 +2,9 @@
 
 namespace Shell.Views
 {
-    public partial class ShellView : Window
+    public partial class ShellWindow : Window
     {
-        public ShellView()
+        public ShellWindow()
         {
             InitializeComponent();
         }

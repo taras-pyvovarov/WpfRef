@@ -20,7 +20,7 @@ namespace Shell
         protected override DependencyObject CreateShell()
         {
             // Use the container to create an instance of the shell.
-            ShellView view = this.Container.TryResolve<ShellView>();
+            ShellWindow view = this.Container.TryResolve<ShellWindow>();
             return view;
         }
 

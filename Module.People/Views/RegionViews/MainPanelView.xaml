@@ -9,9 +9,12 @@
 
     <UserControl.Resources>
 
-        <!--Binding Action panel view to its viewmodel-->
         <DataTemplate DataType="{x:Type viewModels:ShowPersonViewModel}">
             <views:ShowPersonView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:EditPersonViewModel}">
+            <views:EditPersonView />
         </DataTemplate>
 
     </UserControl.Resources>
@@ -42,22 +45,15 @@
         
         <!--Main panel-->
         <DockPanel>
-            
-            <DockPanel DockPanel.Dock="Top">
-                <TextBlock DockPanel.Dock="Left" Text="Validation textbox (only numbers are allowed):"/>
-                <TextBox Text="{Binding ValidatedText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
-            </DockPanel>
-            
             <!--Showing view needed for needed viewmodel-->
             <DockPanel>
                 <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Content="Show in dialog" Command="{Binding ShowPersonDialogCommand}"/>
-                    <Button Content="Edit person" Command="{Binding EditPersonDialogCommand}"/>
+                    <Button Content="Edit in dialog" Command="{Binding EditPersonDialogCommand}"/>
                 </StackPanel>
                 
                 <ContentPresenter Content="{Binding SelectedPersonViewModel}"/>
             </DockPanel>
-            
         </DockPanel>
     </DockPanel>
 </UserControl>

@@ -53,9 +53,10 @@ namespace Module.People.ViewModels
 
         #endregion Commands
 
-        public ShowPersonViewModel SelectedPersonViewModel
+        public object SelectedPersonViewModel
         {
-            get { return new ShowPersonViewModel(new Person("Name1", "Lastname1", "7658675")); }
+            //get { return new ShowPersonViewModel(new Person("Name1", "Lastname1", "7658675")); }
+            get { return new EditPersonViewModel(new Person("Name1", "Lastname1", "7658675"), _container.Resolve<IValidationService>()); }
         }
 
         public MainPanelViewModel(IUnityContainer container)
