@@ -5,6 +5,6 @@ namespace Common.Interfaces
 {
     public interface IWindowService
     {
-        void ShowDialog(object viewModel);
+        bool? ShowDialog(object viewModel);
     }
 }

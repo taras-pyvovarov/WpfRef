@@ -28,8 +28,9 @@
             <TextBlock Text="Person Details" HorizontalAlignment="Center"/>
         </StackPanel>
 
-        <StackPanel DockPanel.Dock="Bottom">
-            <Button Content="Apply" Command="{Binding ApplyEditCommand}"/>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Cancel" IsCancel="True"/>
+            <Button Content="Apply" Command="{Binding ApplyEditCommand}" IsDefault="True"/>
         </StackPanel>
 
         <Grid>

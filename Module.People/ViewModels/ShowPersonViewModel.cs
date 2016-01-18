@@ -3,7 +3,7 @@ using Prism.Mvvm;
 
 namespace Module.People.ViewModels
 {
-    public class PersonViewModel : BindableBase
+    public class ShowPersonViewModel : BindableBase
     {
         private string _firstname;
         public string Firstname
@@ -26,7 +26,7 @@ namespace Module.People.ViewModels
             set { SetProperty(ref this._phoneNumber, value); }
         }
 
-        public PersonViewModel(Person personModel)
+        public ShowPersonViewModel(Person personModel)
         {
             Firstname = personModel.Firstname;
             Lastname = personModel.Lastname;

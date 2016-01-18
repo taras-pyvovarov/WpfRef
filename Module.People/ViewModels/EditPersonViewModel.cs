@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Common.Interfaces;
 using People.Domain;
 using Prism.Mvvm;
+using System.Windows.Input;
+using Prism.Commands;
 
 namespace Module.People.ViewModels
 {
@@ -13,6 +15,18 @@ namespace Module.People.ViewModels
     {
         private readonly Dictionary<string, string[]> _validationErrors = new Dictionary<string, string[]>();
         private readonly IValidationService _validationService;
+        private readonly Person editingPerson;
+
+        #region Commands
+
+        public ICommand _applyEditCommand;
+        public ICommand ApplyEditCommand
+        {
+            get { return _applyEditCommand; }
+            set { SetProperty(ref _applyEditCommand, value); }
+        }
+
+        #endregion Commands
 
         private string _firstname;
         public string Firstname
@@ -49,16 +63,29 @@ namespace Module.People.ViewModels
 
         public EditPersonViewModel(Person personModel, IValidationService validationService)
         {
+            ApplyEditCommand = new DelegateCommand(ApplyEditExecute);
+
             _validationService = validationService;
 
+            editingPerson = personModel;
             Firstname = personModel.Firstname;
             Lastname = personModel.Lastname;
             PhoneNumber = personModel.PhoneNumber;
         }
 
+        #region Command executes
+
+        private void ApplyEditExecute()
+        {
+            editingPerson.Firstname = Firstname;
+            editingPerson.Lastname = Lastname;
+            editingPerson.PhoneNumber = PhoneNumber;
+        }
+
+        #endregion Command executes
+
         private async void ValidateValueAsync(string validatedPropertyName, Func<string[]> validationMethod)
         {
-            //bool isValid = await Task<bool>.Run(() => { return _validationService.ValidatePhoneNumber(nameToValidate, out validationErrors); }).ConfigureAwait(false);
             string[] validationResult = await Task<string[]>.Run(validationMethod).ConfigureAwait(false);
 
             if (validationResult.Length > 0)

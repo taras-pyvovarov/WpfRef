@@ -17,7 +17,7 @@ namespace Shell
             owner = container.Resolve<Window>();
         }
 
-        public void ShowDialog(object viewModel)
+        public bool? ShowDialog(object viewModel)
         {
             Window window = new Window();
             AddWindowBindings(window, viewViewModelBindings);
@@ -26,7 +26,7 @@ namespace Shell
             window.Owner = owner;
 
             window.Content = viewModel;
-            window.ShowDialog();
+            return window.ShowDialog();
         }
 
         private void AddWindowBindings(Window window, Dictionary<Type, Type> viewViewModelBindings)

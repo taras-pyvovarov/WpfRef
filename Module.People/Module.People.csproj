@@ -87,7 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModels\EditPersonViewModel.cs" />
-    <Compile Include="ViewModels\PersonViewModel.cs" />
+    <Compile Include="ViewModels\ShowPersonViewModel.cs" />
     <Compile Include="ViewModels\RegionViewModels\LeftPanelViewModel.cs" />
     <Compile Include="ViewModels\RegionViewModels\MainPanelViewModel.cs" />
     <Compile Include="ViewModels\RegionViewModels\StatusbarViewModel.cs" />
