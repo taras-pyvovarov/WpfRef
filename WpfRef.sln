@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shell", "Ref.UI\Shell.csproj", "{331BEF56-36CB-47B9-864F-FAD5C47CF611}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{938DE7BA-7AEB-46AE-A302-EFC25C6A4712}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.People", "Module.People\Module.People.csproj", "{3D2D932C-11D6-4109-98E5-F1117B533BAD}"
@@ -15,7 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domains", "Domains", "{0790
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "People.Domain", "People.Domain\People.Domain.csproj", "{55D830F0-35CE-48BE-B1A4-742DF2D698F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Common.UI\Presentation.csproj", "{BD496F3B-178E-491A-8F59-DDC09FA0A5DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{BD496F3B-178E-491A-8F59-DDC09FA0A5DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shell", "Shell\Shell.csproj", "{331BEF56-36CB-47B9-864F-FAD5C47CF611}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{331BEF56-36CB-47B9-864F-FAD5C47CF611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{331BEF56-36CB-47B9-864F-FAD5C47CF611}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{331BEF56-36CB-47B9-864F-FAD5C47CF611}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{331BEF56-36CB-47B9-864F-FAD5C47CF611}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3D2D932C-11D6-4109-98E5-F1117B533BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3D2D932C-11D6-4109-98E5-F1117B533BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D2D932C-11D6-4109-98E5-F1117B533BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -43,6 +39,10 @@ Global
 		{BD496F3B-178E-491A-8F59-DDC09FA0A5DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD496F3B-178E-491A-8F59-DDC09FA0A5DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD496F3B-178E-491A-8F59-DDC09FA0A5DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{331BEF56-36CB-47B9-864F-FAD5C47CF611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{331BEF56-36CB-47B9-864F-FAD5C47CF611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{331BEF56-36CB-47B9-864F-FAD5C47CF611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{331BEF56-36CB-47B9-864F-FAD5C47CF611}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
