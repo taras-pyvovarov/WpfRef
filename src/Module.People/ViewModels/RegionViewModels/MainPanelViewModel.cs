@@ -23,6 +23,13 @@ namespace Module.People.ViewModels
             set { SetProperty(ref _showPersonDialogCommand, value); }
         }
 
+        public ICommand _editPersonCommand;
+        public ICommand EditPersonCommand
+        {
+            get { return _editPersonCommand; }
+            set { SetProperty(ref _editPersonCommand, value); }
+        }
+
         public ICommand _editPersonDialogCommand;
         public ICommand EditPersonDialogCommand
         {
@@ -53,17 +60,21 @@ namespace Module.People.ViewModels
 
         #endregion Commands
 
+        public object _selectedPersonViewModel;
         public object SelectedPersonViewModel
         {
-            //get { return new ShowPersonViewModel(new Person("Name1", "Lastname1", "7658675")); }
-            get { return new EditPersonViewModel(new Person("Name1", "Lastname1", "7658675"), _container.Resolve<IValidationService>()); }
+            get { return _selectedPersonViewModel; }
+            private set { SetProperty(ref _selectedPersonViewModel, value); }
         }
 
         public MainPanelViewModel(IUnityContainer container)
         {
             _container = container;
 
+            SelectedPersonViewModel = new ShowPersonViewModel(new Person("Name1", "Lastname1", "7658675"));
+
             ShowPersonDialogCommand = new DelegateCommand(ShowPersonDialogExecute);
+            EditPersonCommand = new DelegateCommand(EditPersonExecute);
             EditPersonDialogCommand = new DelegateCommand(EditPersonDialogExecute);
             BlankLongCommand = new DelegateCommand(BlankLongExecute);
             BlankLongAsyncCommand = DelegateCommand.FromAsyncHandler(BlankLongAsyncExecute);
@@ -77,6 +88,15 @@ namespace Module.People.ViewModels
             IWindowService windowService = _container.Resolve<IWindowService>();
             var showPersonViewModel = new ShowPersonViewModel(new Person("Name1", "Lastname1", "7658675"));
             windowService.ShowDialog(showPersonViewModel);
+        }
+
+        private void EditPersonExecute()
+        {
+            IValidationService validationService = _container.Resolve<IValidationService>();
+            var editPersonViewModel = new EditPersonViewModel(new Person("Name1", "Lastname1", "7658675"), validationService);
+            editPersonViewModel.EditApplied += editPersonViewModel_EditApplied;
+            editPersonViewModel.EditCanceled += editPersonViewModel_EditCanceled;
+            SelectedPersonViewModel = editPersonViewModel;
         }
 
         private void EditPersonDialogExecute()
@@ -103,6 +123,24 @@ namespace Module.People.ViewModels
         }
 
         #endregion Command executes
+
+        private void editPersonViewModel_EditApplied(object sender, EventArgs e)
+        {
+            EditPersonViewModel senderVM = (EditPersonViewModel)sender;
+            senderVM.EditApplied -= editPersonViewModel_EditApplied;
+            senderVM.EditCanceled -= editPersonViewModel_EditCanceled;
+
+            SelectedPersonViewModel = new ShowPersonViewModel(new Person("Name1", "Lastname1", "7658675"));
+        }
+
+        private void editPersonViewModel_EditCanceled(object sender, EventArgs e)
+        {
+            EditPersonViewModel senderVM = (EditPersonViewModel)sender;
+            senderVM.EditApplied -= editPersonViewModel_EditApplied;
+            senderVM.EditCanceled -= editPersonViewModel_EditCanceled;
+
+            SelectedPersonViewModel = new ShowPersonViewModel(new Person("Name1", "Lastname1", "7658675"));
+        }
 
         private void HeavyOperation()
         {

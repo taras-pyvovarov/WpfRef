@@ -49,6 +49,7 @@
             <DockPanel>
                 <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Content="Show in dialog" Command="{Binding ShowPersonDialogCommand}"/>
+                    <Button Content="Edit" Command="{Binding EditPersonCommand}"/>
                     <Button Content="Edit in dialog" Command="{Binding EditPersonDialogCommand}"/>
                 </StackPanel>
                 

@@ -26,6 +26,13 @@ namespace Module.People.ViewModels
             set { SetProperty(ref _applyEditCommand, value); }
         }
 
+        public ICommand _cancelEditCommand;
+        public ICommand CancelEditCommand
+        {
+            get { return _cancelEditCommand; }
+            set { SetProperty(ref _cancelEditCommand, value); }
+        }
+
         #endregion Commands
 
         private string _firstname;
@@ -68,9 +75,13 @@ namespace Module.People.ViewModels
             set { SetProperty(ref this._dialogResult, value); }
         }
 
+        public event EventHandler EditApplied;
+        public event EventHandler EditCanceled;
+
         public EditPersonViewModel(Person personModel, IValidationService validationService)
         {
             ApplyEditCommand = new DelegateCommand(ApplyEditExecute);
+            CancelEditCommand = new DelegateCommand(CancelEditExecute);
 
             _validationService = validationService;
 
@@ -89,6 +100,13 @@ namespace Module.People.ViewModels
             editingPerson.PhoneNumber = PhoneNumber;
 
             DialogResult = true;
+            RaiseEvent(EditApplied);
+        }
+
+        private void CancelEditExecute()
+        {
+            DialogResult = false;
+            RaiseEvent(EditCanceled);
         }
 
         #endregion Command executes
@@ -102,6 +120,13 @@ namespace Module.People.ViewModels
             else if (_validationErrors.ContainsKey(validatedPropertyName))
                 _validationErrors.Remove(validatedPropertyName);
             RaiseErrorsChanged(validatedPropertyName);
+        }
+
+        private void RaiseEvent(EventHandler eventToRaise)
+        {
+            var eventRef = eventToRaise;
+            if (eventRef != null)
+                eventRef(this, EventArgs.Empty);
         }
 
         #region INotifyDataErrorInfo implementation

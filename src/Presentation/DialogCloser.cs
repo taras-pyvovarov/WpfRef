@@ -18,7 +18,7 @@ namespace Presentation
                 return;
 
             Window controlWindow = Window.GetWindow(control);
-            if (controlWindow.Owner == null)
+            if (controlWindow == null || controlWindow.Owner == null)
                 return;
 
             controlWindow.DialogResult = e.NewValue as bool?;
