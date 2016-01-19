@@ -1,7 +1,6 @@
 ﻿<UserControl x:Class="Module.People.Views.MainPanelView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:views="clr-namespace:Module.People.Views"
@@ -26,16 +25,6 @@
             
             <!--Right bottom panel-->
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                <Button Content="Pass EventArgs">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <prism:InvokeCommandAction Command="{Binding PassEventParamsCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=InvokeParameter}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
-                
-                <Button Content="Blank long" Command="{Binding BlankLongCommand}"/>
-                <Button Content="Blank long async" Command="{Binding BlankLongAsyncCommand}"/>
             </StackPanel>
             
             <!--Main bottom panel-->

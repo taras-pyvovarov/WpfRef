@@ -1,9 +1,6 @@
-﻿using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Presentation.PubSubEvents;
+using Prism.Events;
+using Prism.Mvvm;
 
 namespace Shell.ViewModels
 {
@@ -16,9 +13,16 @@ namespace Shell.ViewModels
             private set { SetProperty(ref this._status, value); }
         }
 
-        public StatusPanelViewModel()
+        public StatusPanelViewModel(IEventAggregator eventAggregator)
         {
             Status = "[Messages will appear here]";
+
+            eventAggregator.GetEvent<UserActionHappenedEvent>().Subscribe(UserActionHappened);
+        }
+
+        private void UserActionHappened(string parameter)
+        {
+            Status = parameter;
         }
     }
 }

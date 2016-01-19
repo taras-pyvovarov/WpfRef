@@ -156,6 +156,10 @@
       <Project>{3d2d932c-11d6-4109-98e5-f1117b533bad}</Project>
       <Name>Module.People</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Presentation\Presentation.csproj">
+      <Project>{bd496f3b-178e-491a-8f59-ddc09fa0a5dd}</Project>
+      <Name>Presentation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
