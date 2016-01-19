@@ -90,21 +90,14 @@
     <Compile Include="ViewModels\ShowPersonViewModel.cs" />
     <Compile Include="ViewModels\RegionViewModels\LeftPanelViewModel.cs" />
     <Compile Include="ViewModels\RegionViewModels\MainPanelViewModel.cs" />
-    <Compile Include="ViewModels\RegionViewModels\StatusbarViewModel.cs" />
     <Compile Include="Views\EditPersonView.xaml.cs">
       <DependentUpon>EditPersonView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShowPersonView.xaml.cs">
       <DependentUpon>ShowPersonView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RegionViews\BottomPanelView.xaml.cs">
-      <DependentUpon>BottomPanelView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\RegionViews\LeftPanelView.xaml.cs">
       <DependentUpon>LeftPanelView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\RegionViews\LogoView.xaml.cs">
-      <DependentUpon>LogoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegionViews\MainPanelView.xaml.cs">
       <DependentUpon>MainPanelView.xaml</DependentUpon>
@@ -147,15 +140,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RegionViews\BottomPanelView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\RegionViews\LeftPanelView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\RegionViews\LogoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

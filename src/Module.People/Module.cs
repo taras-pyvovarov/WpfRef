@@ -32,10 +32,8 @@ namespace Module.People
             container.RegisterType<IValidationService, ValidationService>();
 
             // View will be automatically injected to the region when the region is first displayed.
-            this.regionManager.RegisterViewWithRegion(AppConstants.LogoRegion, () => this.container.Resolve<LogoView>());
             this.regionManager.RegisterViewWithRegion(AppConstants.LeftRegion, () => this.container.Resolve<LeftPanelView>());
             this.regionManager.RegisterViewWithRegion(AppConstants.MainRegion, () => this.container.Resolve<MainPanelView>());
-            this.regionManager.RegisterViewWithRegion(AppConstants.StatusRegion, () => this.container.Resolve<BottomPanelView>());
         }
 
         private Type GetViewModelForView(Type viewType)
@@ -50,7 +48,6 @@ namespace Module.People
             Dictionary<Type, Type> viewViewModelBindings = new Dictionary<Type, Type>();
 
             //Region views:
-            viewViewModelBindings.Add(typeof(BottomPanelView), typeof(StatusbarViewModel));
             viewViewModelBindings.Add(typeof(LeftPanelView), typeof(LeftPanelViewModel));
             viewViewModelBindings.Add(typeof(MainPanelView), typeof(MainPanelViewModel));
 

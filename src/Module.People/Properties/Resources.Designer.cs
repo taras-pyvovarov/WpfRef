@@ -59,14 +59,5 @@ namespace Module.People.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Messages will appear here].
-        /// </summary>
-        internal static string Statusbar_DefaultText {
-            get {
-                return ResourceManager.GetString("Statusbar_DefaultText", resourceCulture);
-            }
-        }
     }
 }

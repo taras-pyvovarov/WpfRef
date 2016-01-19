@@ -10,27 +10,19 @@
     <DockPanel>
 
         <!--Bottom status panel-->
-        <Border DockPanel.Dock="Bottom">
-            <ContentControl prism:RegionManager.RegionName="{x:Static common:AppConstants.StatusRegion}"/>
-        </Border>
+        <local:StatusPanelView DockPanel.Dock="Bottom"/>
 
         <DockPanel DockPanel.Dock="Left">
 
             <!--Logo panel-->
-            <Border DockPanel.Dock="Top">
-                <ContentControl prism:RegionManager.RegionName="{x:Static common:AppConstants.LogoRegion}"/>
-            </Border>
+            <local:LogoView DockPanel.Dock="Top"/>
 
             <!--Left helper panel-->
-            <Border>
-                <ContentControl prism:RegionManager.RegionName="{x:Static common:AppConstants.LeftRegion}"/>
-            </Border>
+            <ContentControl prism:RegionManager.RegionName="{x:Static common:AppConstants.LeftRegion}"/>
 
         </DockPanel>
 
         <!--Main workspace-->
-        <Border>
-            <ContentControl prism:RegionManager.RegionName="{x:Static common:AppConstants.MainRegion}"/>
-        </Border>
+        <ContentControl prism:RegionManager.RegionName="{x:Static common:AppConstants.MainRegion}"/>
     </DockPanel>
 </Window>

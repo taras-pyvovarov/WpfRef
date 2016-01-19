@@ -89,6 +89,10 @@
     </ApplicationDefinition>
     <Compile Include="Infrastructure\UICompositionBootstrapper.cs" />
     <Compile Include="Infrastructure\WindowService.cs" />
+    <Compile Include="ViewModels\StatusPanelViewModel.cs" />
+    <Compile Include="Views\LogoView.xaml.cs">
+      <DependentUpon>LogoView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ShellWindow.xaml.cs">
       <DependentUpon>ShellWindow.xaml</DependentUpon>
     </Compile>
@@ -96,7 +100,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\StatusPanelView.xaml.cs">
+      <DependentUpon>StatusPanelView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\LogoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ShellWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatusPanelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -131,9 +146,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{f5ca24e5-3c9e-4396-99e9-a374e280dc78}</Project>
