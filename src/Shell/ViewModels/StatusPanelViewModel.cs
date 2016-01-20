@@ -1,4 +1,4 @@
-﻿using Presentation.PubSubEvents;
+﻿using Presentation.GlobalPubSubEvents;
 using Prism.Events;
 using Prism.Mvvm;
 

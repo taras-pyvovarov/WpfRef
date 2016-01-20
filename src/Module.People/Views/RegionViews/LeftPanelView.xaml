@@ -19,7 +19,13 @@
             <Button Content="Blank long" Command="{Binding BlankLongCommand}"/>
             <Button Content="Blank long async" Command="{Binding BlankLongAsyncCommand}"/>
         </StackPanel>
-        
-        <ListBox ItemsSource="{Binding People}"/>
+
+        <ListBox ItemsSource="{Binding People}" SelectedItem="{Binding SelectedPerson}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Lastname}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </DockPanel>
 </UserControl>

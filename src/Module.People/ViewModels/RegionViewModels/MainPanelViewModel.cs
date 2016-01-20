@@ -5,6 +5,8 @@ using Microsoft.Practices.Unity;
 using People.Domain;
 using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Events;
+using Module.People.PubSubEvents;
 
 namespace Module.People.ViewModels
 {
@@ -14,22 +16,22 @@ namespace Module.People.ViewModels
         
         #region Commands
 
-        public ICommand _showPersonDialogCommand;
-        public ICommand ShowPersonDialogCommand
+        public DelegateCommand _showPersonDialogCommand;
+        public DelegateCommand ShowPersonDialogCommand
         {
             get { return _showPersonDialogCommand; }
             set { SetProperty(ref _showPersonDialogCommand, value); }
         }
 
-        public ICommand _editPersonCommand;
-        public ICommand EditPersonCommand
+        public DelegateCommand _editPersonCommand;
+        public DelegateCommand EditPersonCommand
         {
             get { return _editPersonCommand; }
             set { SetProperty(ref _editPersonCommand, value); }
         }
 
-        public ICommand _editPersonDialogCommand;
-        public ICommand EditPersonDialogCommand
+        public DelegateCommand _editPersonDialogCommand;
+        public DelegateCommand EditPersonDialogCommand
         {
             get { return _editPersonDialogCommand; }
             set { SetProperty(ref _editPersonDialogCommand, value); }
@@ -37,22 +39,33 @@ namespace Module.People.ViewModels
 
         #endregion Commands
 
+        public Person _selectedPerson;
+        public Person SelectedPerson
+        {
+            get { return _selectedPerson; }
+            private set { SetProperty(ref _selectedPerson, value); }
+        }
+
         public object _selectedPersonViewModel;
         public object SelectedPersonViewModel
         {
             get { return _selectedPersonViewModel; }
-            private set { SetProperty(ref _selectedPersonViewModel, value); }
+            private set 
+            { 
+                SetProperty(ref _selectedPersonViewModel, value);
+                EvaluatePersonActionCanExecute();
+            }
         }
 
-        public MainPanelViewModel(IUnityContainer container)
+        public MainPanelViewModel(IUnityContainer container, IEventAggregator eventAggregator)
         {
             _container = container;
-            
-            SelectedPersonViewModel = new ShowPersonViewModel(new Person("Name1", "Lastname1", "7658675"));
 
-            ShowPersonDialogCommand = new DelegateCommand(ShowPersonDialogExecute);
-            EditPersonCommand = new DelegateCommand(EditPersonExecute);
-            EditPersonDialogCommand = new DelegateCommand(EditPersonDialogExecute);
+            ShowPersonDialogCommand = new DelegateCommand(ShowPersonDialogExecute, PersonActionCanExecute);
+            EditPersonCommand = new DelegateCommand(EditPersonExecute, PersonActionCanExecute);
+            EditPersonDialogCommand = new DelegateCommand(EditPersonDialogExecute, PersonActionCanExecute);
+
+            eventAggregator.GetEvent<SelectedPersonChangedEvent>().Subscribe(SelectedPersonChanged);
         }
 
         #region Command executes
@@ -81,7 +94,30 @@ namespace Module.People.ViewModels
             bool? a = windowService.ShowDialog(editPersonViewModel);
         }
 
+        private bool PersonActionCanExecute()
+        {
+            return SelectedPersonViewModel != null;
+        }
+
+        private void EvaluatePersonActionCanExecute()
+        {
+            ShowPersonDialogCommand.RaiseCanExecuteChanged();
+            EditPersonCommand.RaiseCanExecuteChanged();
+            EditPersonDialogCommand.RaiseCanExecuteChanged();
+        }
+
         #endregion Command executes
+
+        private void SelectedPersonChanged(Person person)
+        {
+            if (person == null)
+            {
+                SelectedPersonViewModel = null;
+                return;
+            }
+
+            SelectedPersonViewModel = new ShowPersonViewModel(person);
+        }
 
         private void editPersonViewModel_EditApplied(object sender, EventArgs e)
         {

@@ -1,6 +1,6 @@
 ﻿using Prism.Events;
 
-namespace Presentation.PubSubEvents
+namespace Presentation.GlobalPubSubEvents
 {
     public class UserActionHappenedEvent : PubSubEvent<string> { }
 }

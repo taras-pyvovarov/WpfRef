@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Viewbox>
-        <Grid Width="200" Height="100">
+        <Grid Width="200" Height="60">
             
             <Ellipse Fill="DarkBlue" Stroke="Black" StrokeThickness="4"/>
 
             <TextBlock Text="Logo" HorizontalAlignment="Center" VerticalAlignment="Center"
-                       Foreground="White" FontSize="50" FontStyle="Italic" />
+                       Foreground="White" FontSize="40" FontStyle="Italic" />
         </Grid>
     </Viewbox>
 </UserControl>

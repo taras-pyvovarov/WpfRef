@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Presentation.PubSubEvents;
+using People.Domain;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
+using Module.People.PubSubEvents;
+using Presentation.GlobalPubSubEvents;
 
 namespace Module.People.ViewModels
 {
@@ -14,11 +16,22 @@ namespace Module.People.ViewModels
     {
         private IEventAggregator _eventAggregator;
 
-        private List<string> _people;
-        public List<string> People
+        private ObservableCollection<Person> _people;
+        public ObservableCollection<Person> People
         {
             get { return _people; }
             private set { SetProperty(ref this._people, value); }
+        }
+
+        private Person _selectedPerson;
+        public Person SelectedPerson
+        {
+            get { return _selectedPerson; }
+            set 
+            { 
+                SetProperty(ref this._selectedPerson, value);
+                _eventAggregator.GetEvent<SelectedPersonChangedEvent>().Publish(_selectedPerson);
+            }
         }
 
         #region Commands
@@ -54,14 +67,8 @@ namespace Module.People.ViewModels
             BlankLongAsyncCommand = DelegateCommand.FromAsyncHandler(BlankLongAsyncExecute);
             PassEventParamsCommand = new DelegateCommand<EventArgs>(PassEventParamsExecute);
 
-            var people = new List<string>();
-            people.Add("People1");
-            people.Add("People2");
-            people.Add("People3");
-            people.Add("People4");
-            people.Add("People5");
-
-            People = people;
+            PeopleProvider peopleProvider = new PeopleProvider();
+            People = new ObservableCollection<Person>(peopleProvider.GetPeople());
         }
 
         #region Command executes

@@ -31,19 +31,25 @@
             <DockPanel>
             </DockPanel>
         </DockPanel>
-        
-        <!--Main panel-->
-        <DockPanel>
+
+        <!--Top panel-->
+        <DockPanel DockPanel.Dock="Top">
+
             <!--Showing view needed for needed viewmodel-->
             <DockPanel>
-                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Content="Show in dialog" Command="{Binding ShowPersonDialogCommand}"/>
                     <Button Content="Edit" Command="{Binding EditPersonCommand}"/>
                     <Button Content="Edit in dialog" Command="{Binding EditPersonDialogCommand}"/>
                 </StackPanel>
-                
+
                 <ContentPresenter Content="{Binding SelectedPersonViewModel}"/>
             </DockPanel>
+        </DockPanel>
+
+        <!--Main panel-->
+        <DockPanel>
+            
         </DockPanel>
     </DockPanel>
 </UserControl>

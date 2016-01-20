@@ -86,6 +86,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PubSubEvents\SelectedPersonChangedEvent.cs" />
     <Compile Include="ViewModels\EditPersonViewModel.cs" />
     <Compile Include="ViewModels\ShowPersonViewModel.cs" />
     <Compile Include="ViewModels\RegionViewModels\LeftPanelViewModel.cs" />
