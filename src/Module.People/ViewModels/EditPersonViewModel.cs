@@ -8,25 +8,24 @@ using People.Domain;
 using Prism.Mvvm;
 using System.Windows.Input;
 using Prism.Commands;
+using System.Windows.Threading;
+using System.Windows;
 
 namespace Module.People.ViewModels
 {
-    public class EditPersonViewModel : PersonViewModel, INotifyDataErrorInfo
+    public class EditPersonViewModel : PersonViewModel
     {
-        private readonly Dictionary<string, string[]> _validationErrors = new Dictionary<string, string[]>();
-        private readonly IValidationService _validationService;
-
         #region Commands
 
-        public ICommand _applyEditCommand;
-        public ICommand ApplyEditCommand
+        public DelegateCommand _applyEditCommand;
+        public DelegateCommand ApplyEditCommand
         {
             get { return _applyEditCommand; }
             set { SetProperty(ref _applyEditCommand, value); }
         }
 
-        public ICommand _cancelEditCommand;
-        public ICommand CancelEditCommand
+        public DelegateCommand _cancelEditCommand;
+        public DelegateCommand CancelEditCommand
         {
             get { return _cancelEditCommand; }
             set { SetProperty(ref _cancelEditCommand, value); }
@@ -44,15 +43,20 @@ namespace Module.People.ViewModels
         public event EventHandler EditApplied;
         public event EventHandler EditCanceled;
 
-        public EditPersonViewModel(Person personModel, IValidationService validationService) : base(personModel)
+        public EditPersonViewModel(Person personModel, IValidationService validationService)
+            : base(personModel, validationService)
         {
-            ApplyEditCommand = new DelegateCommand(ApplyEditExecute);
+            ApplyEditCommand = new DelegateCommand(ApplyEditExecute, ApplyEditCanExecute);
             CancelEditCommand = new DelegateCommand(CancelEditExecute);
-
-            _validationService = validationService;
+            ValidationErrorsChanged = () => EvaluateApplyEditCanExecute();
         }
 
         #region Command executes
+
+        private bool ApplyEditCanExecute()
+        {
+            return !HasErrors;
+        }
 
         private void ApplyEditExecute()
         {
@@ -70,15 +74,9 @@ namespace Module.People.ViewModels
 
         #endregion Command executes
 
-        private async void ValidateValueAsync(string validatedPropertyName, Func<string[]> validationMethod)
+        private void EvaluateApplyEditCanExecute()
         {
-            string[] validationResult = await Task<string[]>.Run(validationMethod).ConfigureAwait(false);
-
-            if (validationResult.Length > 0)
-                _validationErrors[validatedPropertyName] = validationResult;
-            else if (_validationErrors.ContainsKey(validatedPropertyName))
-                _validationErrors.Remove(validatedPropertyName);
-            RaiseErrorsChanged(validatedPropertyName);
+            ApplyEditCommand.RaiseCanExecuteChanged();
         }
 
         private void RaiseEvent(EventHandler eventToRaise)
@@ -87,29 +85,5 @@ namespace Module.People.ViewModels
             if (eventRef != null)
                 eventRef(this, EventArgs.Empty);
         }
-
-        #region INotifyDataErrorInfo implementation
-
-        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-        private void RaiseErrorsChanged(string propertyName)
-        {
-            if (ErrorsChanged != null)
-                ErrorsChanged(this, new DataErrorsChangedEventArgs(propertyName));
-        }
-
-        public IEnumerable GetErrors(string propertyName)
-        {
-            if (string.IsNullOrEmpty(propertyName) || !_validationErrors.ContainsKey(propertyName))
-                return null;
-
-            return _validationErrors[propertyName];
-        }
-
-        public bool HasErrors
-        {
-            get { return _validationErrors.Count > 0; }
-        }
-
-        #endregion INotifyDataErrorInfo implementation
     }
 }
