@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Common.Interfaces;
 
 namespace People.Domain
@@ -8,15 +9,37 @@ namespace People.Domain
         public string[] ValidateName(string nameToValidate)
         {
             List<string> errors = new List<string>();
-            errors.Add("test error");
-            errors.Add("test error2");
+
+            if (string.IsNullOrWhiteSpace(nameToValidate))
+                errors.Add("Name cannot be empty");
+
+            foreach (var singleChar in nameToValidate)
+            {
+                if (!char.IsLetter(singleChar) && singleChar != ' ' && singleChar != '-')
+                {
+                    errors.Add("Name contains illegal chars");
+                    break;
+                }
+            }
+
+            if (!char.IsUpper(nameToValidate.First()))
+                errors.Add("Name should start with uppercase letter");
             return errors.ToArray();
         }
 
         public string[] ValidatePhoneNumber(string phoneNumberToValidate)
         {
             List<string> errors = new List<string>();
-            errors.Add("test error3");
+
+            foreach (var singleChar in phoneNumberToValidate)
+            {
+                if (!char.IsNumber(singleChar) && singleChar != ' ' && singleChar != '-')
+                {
+                    errors.Add("Phone number contains illegal chars");
+                    break;
+                }
+            }
+
             return errors.ToArray();
         }
     }

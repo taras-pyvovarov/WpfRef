@@ -24,39 +24,41 @@
             </DockPanel>
         </ControlTemplate>
     </UserControl.Resources>
-    
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top">
-            <TextBlock Text="Person Details" HorizontalAlignment="Center"/>
-        </StackPanel>
 
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Cancel" Command="{Binding CancelEditCommand}" IsCancel="True"/>
-            <Button Content="Apply" Command="{Binding ApplyEditCommand}" IsDefault="True"/>
-        </StackPanel>
+    <Border Margin="5" CornerRadius="5" BorderThickness="1" BorderBrush="Gray">
+        <DockPanel Margin="10,0">
+            <StackPanel DockPanel.Dock="Top">
+                <TextBlock Text="Person Details" HorizontalAlignment="Center" Margin="5" FontSize="16" FontWeight="SemiBold"/>
+            </StackPanel>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Cancel" Command="{Binding CancelEditCommand}" IsCancel="True" Margin="5"/>
+                <Button Content="Apply" Command="{Binding ApplyEditCommand}" IsDefault="True" Margin="5"/>
+            </StackPanel>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Firstname:"/>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
-                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
-                
-            </TextBox>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" MinWidth="200"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="Lastname:"/>
-            <TextBox Grid.Row="1" Grid.Column="1" />
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Firstname:" Margin="5"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                         Margin="5" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"/>
 
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="Phone number:"/>
-            <TextBox Grid.Row="2" Grid.Column="1" />
-        </Grid>
-    </DockPanel>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Lastname:" Margin="5"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                         Margin="5" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Phone number:" Margin="5"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                         Margin="5" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"/>
+            </Grid>
+        </DockPanel>
+    </Border>
 </UserControl>

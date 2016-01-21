@@ -15,7 +15,6 @@ namespace Module.People.ViewModels
     {
         private readonly Dictionary<string, string[]> _validationErrors = new Dictionary<string, string[]>();
         private readonly IValidationService _validationService;
-        private readonly Person editingPerson;
 
         #region Commands
 
@@ -34,6 +33,8 @@ namespace Module.People.ViewModels
         }
 
         #endregion Commands
+
+        public Person Model { get; private set; }
 
         private string _firstname;
         public string Firstname
@@ -85,19 +86,19 @@ namespace Module.People.ViewModels
 
             _validationService = validationService;
 
-            editingPerson = personModel;
-            Firstname = personModel.Firstname;
-            Lastname = personModel.Lastname;
-            PhoneNumber = personModel.PhoneNumber;
+            Model = personModel;
+            Firstname = Model.Firstname;
+            Lastname = Model.Lastname;
+            PhoneNumber = Model.PhoneNumber;
         }
 
         #region Command executes
 
         private void ApplyEditExecute()
         {
-            editingPerson.Firstname = Firstname;
-            editingPerson.Lastname = Lastname;
-            editingPerson.PhoneNumber = PhoneNumber;
+            Model.Firstname = Firstname;
+            Model.Lastname = Lastname;
+            Model.PhoneNumber = PhoneNumber;
 
             DialogResult = true;
             RaiseEvent(EditApplied);

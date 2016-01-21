@@ -9,6 +9,7 @@ using Prism.Events;
 using Prism.Mvvm;
 using Module.People.PubSubEvents;
 using Presentation.GlobalPubSubEvents;
+using System.Linq;
 
 namespace Module.People.ViewModels
 {
@@ -16,21 +17,21 @@ namespace Module.People.ViewModels
     {
         private IEventAggregator _eventAggregator;
 
-        private ObservableCollection<Person> _people;
-        public ObservableCollection<Person> People
+        private ObservableCollection<PersonListItemViewModel> _people;
+        public ObservableCollection<PersonListItemViewModel> People
         {
             get { return _people; }
             private set { SetProperty(ref this._people, value); }
         }
 
-        private Person _selectedPerson;
-        public Person SelectedPerson
+        private PersonListItemViewModel _selectedPerson;
+        public PersonListItemViewModel SelectedPerson
         {
             get { return _selectedPerson; }
             set 
             { 
                 SetProperty(ref this._selectedPerson, value);
-                _eventAggregator.GetEvent<SelectedPersonChangedEvent>().Publish(_selectedPerson);
+                _eventAggregator.GetEvent<SelectedPersonChangedEvent>().Publish(_selectedPerson.Model);
             }
         }
 
@@ -68,7 +69,7 @@ namespace Module.People.ViewModels
             PassEventParamsCommand = new DelegateCommand<EventArgs>(PassEventParamsExecute);
 
             PeopleProvider peopleProvider = new PeopleProvider();
-            People = new ObservableCollection<Person>(peopleProvider.GetPeople());
+            People = new ObservableCollection<PersonListItemViewModel>(peopleProvider.GetPeople().Select(x => new PersonListItemViewModel(x)));
         }
 
         #region Command executes

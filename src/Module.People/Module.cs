@@ -52,7 +52,7 @@ namespace Module.People
             viewViewModelBindings.Add(typeof(MainPanelView), typeof(MainPanelViewModel));
 
             //Other views:
-            viewViewModelBindings.Add(typeof(ShowPersonView), typeof(ShowPersonViewModel));
+            viewViewModelBindings.Add(typeof(ShowPersonView), typeof(PersonViewModel));
             viewViewModelBindings.Add(typeof(EditPersonView), typeof(EditPersonViewModel));
 
             return viewViewModelBindings;

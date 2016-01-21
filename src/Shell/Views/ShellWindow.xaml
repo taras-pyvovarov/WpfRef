@@ -15,7 +15,7 @@
         <DockPanel DockPanel.Dock="Left">
 
             <!--Logo panel-->
-            <local:LogoView DockPanel.Dock="Top" Width="200"/>
+            <local:LogoView DockPanel.Dock="Top" Width="200" Margin="5"/>
 
             <!--Left helper panel-->
             <ContentControl prism:RegionManager.RegionName="{x:Static common:AppConstants.LeftRegion}"/>

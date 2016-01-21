@@ -5,7 +5,7 @@
     <Viewbox>
         <Grid Width="200" Height="60">
             
-            <Ellipse Fill="DarkBlue" Stroke="Black" StrokeThickness="4"/>
+            <Border Background="DarkBlue" BorderThickness="4" BorderBrush="LightGray" CornerRadius="20" />
 
             <TextBlock Text="Logo" HorizontalAlignment="Center" VerticalAlignment="Center"
                        Foreground="White" FontSize="40" FontStyle="Italic" />

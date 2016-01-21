@@ -73,14 +73,14 @@ namespace Module.People.ViewModels
         private void ShowPersonDialogExecute()
         {
             IWindowService windowService = _container.Resolve<IWindowService>();
-            var showPersonViewModel = new ShowPersonViewModel(new Person("Name1", "Lastname1", "7658675"));
+            var showPersonViewModel = new PersonViewModel(SelectedPerson);
             windowService.ShowDialog(showPersonViewModel);
         }
 
         private void EditPersonExecute()
         {
             IValidationService validationService = _container.Resolve<IValidationService>();
-            var editPersonViewModel = new EditPersonViewModel(new Person("Name1", "Lastname1", "7658675"), validationService);
+            var editPersonViewModel = new EditPersonViewModel(SelectedPerson, validationService);
             editPersonViewModel.EditApplied += editPersonViewModel_EditApplied;
             editPersonViewModel.EditCanceled += editPersonViewModel_EditCanceled;
             SelectedPersonViewModel = editPersonViewModel;
@@ -90,7 +90,7 @@ namespace Module.People.ViewModels
         {
             IWindowService windowService = _container.Resolve<IWindowService>();
             IValidationService validationService = _container.Resolve<IValidationService>();
-            var editPersonViewModel = new EditPersonViewModel(new Person("Name1", "Lastname1", "7658675"), validationService);
+            var editPersonViewModel = new EditPersonViewModel(SelectedPerson, validationService);
             bool? a = windowService.ShowDialog(editPersonViewModel);
         }
 
@@ -113,10 +113,12 @@ namespace Module.People.ViewModels
             if (person == null)
             {
                 SelectedPersonViewModel = null;
+                SelectedPerson = null;
                 return;
             }
 
-            SelectedPersonViewModel = new ShowPersonViewModel(person);
+            SelectedPerson = person;
+            SelectedPersonViewModel = new PersonViewModel(SelectedPerson);
         }
 
         private void editPersonViewModel_EditApplied(object sender, EventArgs e)
@@ -125,7 +127,7 @@ namespace Module.People.ViewModels
             senderVM.EditApplied -= editPersonViewModel_EditApplied;
             senderVM.EditCanceled -= editPersonViewModel_EditCanceled;
 
-            SelectedPersonViewModel = new ShowPersonViewModel(new Person("Name1", "Lastname1", "7658675"));
+            SelectedPersonViewModel = new PersonViewModel(senderVM.Model);
         }
 
         private void editPersonViewModel_EditCanceled(object sender, EventArgs e)
@@ -134,7 +136,7 @@ namespace Module.People.ViewModels
             senderVM.EditApplied -= editPersonViewModel_EditApplied;
             senderVM.EditCanceled -= editPersonViewModel_EditCanceled;
 
-            SelectedPersonViewModel = new ShowPersonViewModel(new Person("Name1", "Lastname1", "7658675"));
+            SelectedPersonViewModel = new PersonViewModel(senderVM.Model);
         }
     }
 }

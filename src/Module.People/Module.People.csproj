@@ -88,7 +88,8 @@
   <ItemGroup>
     <Compile Include="PubSubEvents\SelectedPersonChangedEvent.cs" />
     <Compile Include="ViewModels\EditPersonViewModel.cs" />
-    <Compile Include="ViewModels\ShowPersonViewModel.cs" />
+    <Compile Include="ViewModels\PersonListItemViewModel.cs" />
+    <Compile Include="ViewModels\PersonViewModel.cs" />
     <Compile Include="ViewModels\RegionViewModels\LeftPanelViewModel.cs" />
     <Compile Include="ViewModels\RegionViewModels\MainPanelViewModel.cs" />
     <Compile Include="Views\EditPersonView.xaml.cs">

@@ -20,7 +20,7 @@
         </Style>
     </UserControl.Resources>
 
-    <DockPanel Background="#FFD7E7FF">
+    <DockPanel Background="LightGray">
         <TextBlock Text="{Binding Status, NotifyOnTargetUpdated=True}" Style="{StaticResource StatusTextBlockStyle}"
                    FontWeight="Heavy" Foreground="DarkBlue"/>
     </DockPanel>
