@@ -13,6 +13,7 @@ namespace Module.People.ViewModels
     public class MainPanelViewModel : BindableBase
     {
         private IUnityContainer _container;
+        private IEventAggregator _eventAggregator;
         
         #region Commands
 
@@ -51,7 +52,21 @@ namespace Module.People.ViewModels
         {
             get { return _selectedPersonViewModel; }
             private set 
-            { 
+            {
+                if (_selectedPersonViewModel is EditPersonViewModel)
+                {
+                    var editVM = (EditPersonViewModel)_selectedPersonViewModel;
+                    editVM.EditApplied -= editPersonViewModel_EditApplied;
+                    editVM.EditCanceled -= editPersonViewModel_EditCanceled;
+                }
+
+                if (value is EditPersonViewModel)
+                {
+                    var editVM = (EditPersonViewModel)value;
+                    editVM.EditApplied += editPersonViewModel_EditApplied;
+                    editVM.EditCanceled += editPersonViewModel_EditCanceled;
+                }
+
                 SetProperty(ref _selectedPersonViewModel, value);
                 EvaluatePersonActionCanExecute();
             }
@@ -60,12 +75,13 @@ namespace Module.People.ViewModels
         public MainPanelViewModel(IUnityContainer container, IEventAggregator eventAggregator)
         {
             _container = container;
+            _eventAggregator = eventAggregator;
 
             ShowPersonDialogCommand = new DelegateCommand(ShowPersonDialogExecute, PersonActionCanExecute);
             EditPersonCommand = new DelegateCommand(EditPersonExecute, PersonActionCanExecute);
             EditPersonDialogCommand = new DelegateCommand(EditPersonDialogExecute, PersonActionCanExecute);
 
-            eventAggregator.GetEvent<SelectedPersonChangedEvent>().Subscribe(SelectedPersonChanged);
+            eventAggregator.GetEvent<PersonSelectionChangedEvent>().Subscribe(PersonSelectionChanged);
         }
 
         #region Command executes
@@ -81,8 +97,6 @@ namespace Module.People.ViewModels
         {
             IValidationService validationService = _container.Resolve<IValidationService>();
             var editPersonViewModel = new EditPersonViewModel(SelectedPerson, validationService);
-            editPersonViewModel.EditApplied += editPersonViewModel_EditApplied;
-            editPersonViewModel.EditCanceled += editPersonViewModel_EditCanceled;
             SelectedPersonViewModel = editPersonViewModel;
         }
 
@@ -91,7 +105,11 @@ namespace Module.People.ViewModels
             IWindowService windowService = _container.Resolve<IWindowService>();
             IValidationService validationService = _container.Resolve<IValidationService>();
             var editPersonViewModel = new EditPersonViewModel(SelectedPerson, validationService);
-            bool? a = windowService.ShowDialog(editPersonViewModel);
+            bool? dialogResult = windowService.ShowDialog(editPersonViewModel);
+            if (dialogResult == true)
+                editPersonViewModel_EditApplied(editPersonViewModel, EventArgs.Empty);
+            else
+                editPersonViewModel_EditCanceled(editPersonViewModel, EventArgs.Empty);
         }
 
         private bool PersonActionCanExecute()
@@ -108,7 +126,7 @@ namespace Module.People.ViewModels
 
         #endregion Command executes
 
-        private void SelectedPersonChanged(Person person)
+        private void PersonSelectionChanged(Person person)
         {
             if (person == null)
             {
@@ -124,18 +142,14 @@ namespace Module.People.ViewModels
         private void editPersonViewModel_EditApplied(object sender, EventArgs e)
         {
             EditPersonViewModel senderVM = (EditPersonViewModel)sender;
-            senderVM.EditApplied -= editPersonViewModel_EditApplied;
-            senderVM.EditCanceled -= editPersonViewModel_EditCanceled;
-
             SelectedPersonViewModel = new PersonViewModel(senderVM.Model);
+
+            _eventAggregator.GetEvent<PersonChangedEvent>().Publish(SelectedPerson);
         }
 
         private void editPersonViewModel_EditCanceled(object sender, EventArgs e)
         {
             EditPersonViewModel senderVM = (EditPersonViewModel)sender;
-            senderVM.EditApplied -= editPersonViewModel_EditApplied;
-            senderVM.EditCanceled -= editPersonViewModel_EditCanceled;
-
             SelectedPersonViewModel = new PersonViewModel(senderVM.Model);
         }
     }

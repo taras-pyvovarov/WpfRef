@@ -3,5 +3,5 @@ using Prism.Events;
 
 namespace Module.People.PubSubEvents
 {
-    public class SelectedPersonChangedEvent : PubSubEvent<Person> { }
+    public class PersonChangedEvent : PubSubEvent<Person> { }
 }

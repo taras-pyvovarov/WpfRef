@@ -24,5 +24,10 @@ namespace Module.People.ViewModels
             Model = personModel;
             Lastname = Model.Lastname;
         }
+
+        public static void ConvertModelToViewModel(Person model, PersonListItemViewModel viewModel)
+        {
+            viewModel.Lastname = model.Lastname;
+        }
     }
 }

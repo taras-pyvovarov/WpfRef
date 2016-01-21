@@ -33,24 +33,24 @@ namespace Module.People.ViewModels
             set { SetProperty(ref _phoneNumber, value); }
         }
 
-        public PersonViewModel(Person personModel)
+        public PersonViewModel(Person model)
         {
-            Model = personModel;
+            Model = model;
             ConvertModelToViewModel(Model, this);
         }
 
-        public static void ConvertModelToViewModel(Person personModel, PersonViewModel personViewModel)
+        public static void ConvertModelToViewModel(Person model, PersonViewModel viewModel)
         {
-            personViewModel.Firstname = personModel.Firstname;
-            personViewModel.Lastname = personModel.Lastname;
-            personViewModel.PhoneNumber = personModel.PhoneNumber;
+            viewModel.Firstname = model.Firstname;
+            viewModel.Lastname = model.Lastname;
+            viewModel.PhoneNumber = model.PhoneNumber;
         }
 
-        public static void ConvertViewModelToModel(PersonViewModel personViewModel, Person personModel)
+        public static void ConvertViewModelToModel(PersonViewModel viewModel, Person model)
         {
-            personModel.Firstname = personViewModel.Firstname;
-            personModel.Lastname = personViewModel.Lastname;
-            personModel.PhoneNumber = personViewModel.PhoneNumber;
+            model.Firstname = viewModel.Firstname;
+            model.Lastname = viewModel.Lastname;
+            model.PhoneNumber = viewModel.PhoneNumber;
         }
     }
 }

@@ -11,7 +11,7 @@ using Prism.Commands;
 
 namespace Module.People.ViewModels
 {
-    public class EditPersonViewModel : BindableBase, INotifyDataErrorInfo
+    public class EditPersonViewModel : PersonViewModel, INotifyDataErrorInfo
     {
         private readonly Dictionary<string, string[]> _validationErrors = new Dictionary<string, string[]>();
         private readonly IValidationService _validationService;
@@ -34,41 +34,6 @@ namespace Module.People.ViewModels
 
         #endregion Commands
 
-        public Person Model { get; private set; }
-
-        private string _firstname;
-        public string Firstname
-        {
-            get { return _firstname; }
-            set
-            {
-                SetProperty(ref this._firstname, value);
-                ValidateValueAsync(nameof(Firstname), () => _validationService.ValidateName(value));
-            }
-        }
-
-        private string _lastname;
-        public string Lastname
-        {
-            get { return _lastname; }
-            set
-            {
-                SetProperty(ref this._lastname, value);
-                ValidateValueAsync(nameof(Lastname), () => _validationService.ValidateName(value));
-            }
-        }
-
-        private string _phoneNumber;
-        public string PhoneNumber
-        {
-            get { return _phoneNumber; }
-            set
-            {
-                SetProperty(ref this._phoneNumber, value);
-                ValidateValueAsync(nameof(PhoneNumber), () => _validationService.ValidatePhoneNumber(value));
-            }
-        }
-
         private bool? _dialogResult;
         public bool? DialogResult
         {
@@ -79,26 +44,19 @@ namespace Module.People.ViewModels
         public event EventHandler EditApplied;
         public event EventHandler EditCanceled;
 
-        public EditPersonViewModel(Person personModel, IValidationService validationService)
+        public EditPersonViewModel(Person personModel, IValidationService validationService) : base(personModel)
         {
             ApplyEditCommand = new DelegateCommand(ApplyEditExecute);
             CancelEditCommand = new DelegateCommand(CancelEditExecute);
 
             _validationService = validationService;
-
-            Model = personModel;
-            Firstname = Model.Firstname;
-            Lastname = Model.Lastname;
-            PhoneNumber = Model.PhoneNumber;
         }
 
         #region Command executes
 
         private void ApplyEditExecute()
         {
-            Model.Firstname = Firstname;
-            Model.Lastname = Lastname;
-            Model.PhoneNumber = PhoneNumber;
+            ConvertViewModelToModel(this, Model);
 
             DialogResult = true;
             RaiseEvent(EditApplied);

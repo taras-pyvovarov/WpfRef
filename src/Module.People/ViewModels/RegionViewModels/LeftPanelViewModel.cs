@@ -31,7 +31,7 @@ namespace Module.People.ViewModels
             set 
             { 
                 SetProperty(ref this._selectedPerson, value);
-                _eventAggregator.GetEvent<SelectedPersonChangedEvent>().Publish(_selectedPerson.Model);
+                _eventAggregator.GetEvent<PersonSelectionChangedEvent>().Publish(_selectedPerson.Model);
             }
         }
 
@@ -64,6 +64,8 @@ namespace Module.People.ViewModels
         {
             _eventAggregator = eventAggregator;
 
+            _eventAggregator.GetEvent<PersonChangedEvent>().Subscribe(PersonChanged);
+
             BlankLongCommand = new DelegateCommand(BlankLongExecute);
             BlankLongAsyncCommand = DelegateCommand.FromAsyncHandler(BlankLongAsyncExecute);
             PassEventParamsCommand = new DelegateCommand<EventArgs>(PassEventParamsExecute);
@@ -92,6 +94,12 @@ namespace Module.People.ViewModels
         }
 
         #endregion Command executes
+
+        private void PersonChanged(Person person)
+        {
+            PersonListItemViewModel personViewModel = People.Single(x => x.Model == person);
+            PersonListItemViewModel.ConvertModelToViewModel(person, personViewModel);
+        }
 
         private void HeavyOperation()
         {
