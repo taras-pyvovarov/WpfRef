@@ -48,8 +48,8 @@
         </DockPanel>
 
         <!--Main panel-->
-        <DockPanel>
-            
+        <DockPanel Margin="0,5,0,0">
+            <Button Content="Navigate products" Command="{Binding NavigateProductsCommand}" />
         </DockPanel>
     </DockPanel>
 </UserControl>

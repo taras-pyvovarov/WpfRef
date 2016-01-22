@@ -8,6 +8,8 @@ using Prism.Mvvm;
 using Prism.Events;
 using Module.People.PubSubEvents;
 using Presentation.GlobalPubSubEvents;
+using Prism.Regions;
+using Common;
 
 namespace Module.People.ViewModels
 {
@@ -37,6 +39,13 @@ namespace Module.People.ViewModels
         {
             get { return _editPersonDialogCommand; }
             set { SetProperty(ref _editPersonDialogCommand, value); }
+        }
+
+        public DelegateCommand _navigateProductsCommand;
+        public DelegateCommand NavigateProductsCommand
+        {
+            get { return _navigateProductsCommand; }
+            set { SetProperty(ref _navigateProductsCommand, value); }
         }
 
         #endregion Commands
@@ -81,6 +90,7 @@ namespace Module.People.ViewModels
             ShowPersonDialogCommand = new DelegateCommand(ShowPersonDialogExecute, PersonActionCanExecute);
             EditPersonCommand = new DelegateCommand(EditPersonExecute, PersonActionCanExecute);
             EditPersonDialogCommand = new DelegateCommand(EditPersonDialogExecute, PersonActionCanExecute);
+            NavigateProductsCommand = new DelegateCommand(NavigateProductsExecute);
 
             eventAggregator.GetEvent<PersonSelectionChangedEvent>().Subscribe(PersonSelectionChanged);
         }
@@ -126,6 +136,15 @@ namespace Module.People.ViewModels
             ShowPersonDialogCommand.RaiseCanExecuteChanged();
             EditPersonCommand.RaiseCanExecuteChanged();
             EditPersonDialogCommand.RaiseCanExecuteChanged();
+        }
+
+        private void NavigateProductsExecute()
+        {
+            IRegionManager regionManager = _container.Resolve<IRegionManager>();
+            Uri ProductLeftViewUri = new Uri("ProductLeftView", UriKind.Relative);
+            Uri ProductMainViewUri = new Uri("ProductMainView", UriKind.Relative);
+            regionManager.RequestNavigate(AppConstants.LeftRegion, ProductLeftViewUri);
+            regionManager.RequestNavigate(AppConstants.MainRegion, ProductMainViewUri);
         }
 
         #endregion Command executes

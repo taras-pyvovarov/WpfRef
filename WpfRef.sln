@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{938DE7BA-7AEB-46AE-A302-EFC25C6A4712}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shell", "src\Shell\Shell.csproj", "{331BEF56-36CB-47B9-864F-FAD5C47CF611}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "People.Domain", "src\People.Domain\People.Domain.csproj", "{55D830F0-35CE-48BE-B1A4-742DF2D698F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Products", "src\Module.Products\Module.Products.csproj", "{58A96C4E-2722-439B-896D-D0A8F3B2AFDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{55D830F0-35CE-48BE-B1A4-742DF2D698F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55D830F0-35CE-48BE-B1A4-742DF2D698F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55D830F0-35CE-48BE-B1A4-742DF2D698F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58A96C4E-2722-439B-896D-D0A8F3B2AFDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58A96C4E-2722-439B-896D-D0A8F3B2AFDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58A96C4E-2722-439B-896D-D0A8F3B2AFDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58A96C4E-2722-439B-896D-D0A8F3B2AFDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +56,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3D2D932C-11D6-4109-98E5-F1117B533BAD} = {938DE7BA-7AEB-46AE-A302-EFC25C6A4712}
 		{55D830F0-35CE-48BE-B1A4-742DF2D698F1} = {07906D9F-87BE-4CAF-9D09-11EA10F50721}
+		{58A96C4E-2722-439B-896D-D0A8F3B2AFDD} = {938DE7BA-7AEB-46AE-A302-EFC25C6A4712}
 	EndGlobalSection
 EndGlobal
