@@ -14,7 +14,8 @@ namespace Shell
             base.ConfigureModuleCatalog();
 
             ModuleCatalog moduleCatalog = (ModuleCatalog)this.ModuleCatalog;
-            moduleCatalog.AddModule(typeof(Module.People.Module));
+            moduleCatalog.AddModule(new ModuleInfo("PeopleModule", typeof(Module.People.Module).AssemblyQualifiedName));
+            moduleCatalog.AddModule(new ModuleInfo("ProductsModule", typeof(Module.Products.Module).AssemblyQualifiedName));
         }
 
         protected override DependencyObject CreateShell()

@@ -156,6 +156,10 @@
       <Project>{3d2d932c-11d6-4109-98e5-f1117b533bad}</Project>
       <Name>Module.People</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Module.Products\Module.Products.csproj">
+      <Project>{58a96c4e-2722-439b-896d-d0a8f3b2afdd}</Project>
+      <Name>Module.Products</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Presentation\Presentation.csproj">
       <Project>{bd496f3b-178e-491a-8f59-ddc09fa0a5dd}</Project>
       <Name>Presentation</Name>

@@ -6,7 +6,7 @@ using Microsoft.Practices.Unity;
 
 namespace Shell
 {
-    public class WindowService : IWindowService
+    internal class WindowService : IWindowService
     {
         private Window owner;
         private Dictionary<Type, Type> viewViewModelBindings;

@@ -25,7 +25,7 @@
         </ControlTemplate>
     </UserControl.Resources>
 
-    <Border Margin="5" CornerRadius="5" BorderThickness="1" BorderBrush="Gray">
+    <Border CornerRadius="5" BorderThickness="1" BorderBrush="Gray">
         <DockPanel Margin="10,5">
             <StackPanel DockPanel.Dock="Top">
                 <TextBlock Text="Person Details" HorizontalAlignment="Center" FontSize="16" FontWeight="SemiBold"/>

@@ -18,20 +18,7 @@
 
     </UserControl.Resources>
 
-    <DockPanel Margin="5">
-        
-        <!--Bottom panel-->
-        <DockPanel DockPanel.Dock="Bottom">
-            
-            <!--Right bottom panel-->
-            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-            </StackPanel>
-            
-            <!--Main bottom panel-->
-            <DockPanel>
-            </DockPanel>
-        </DockPanel>
-
+    <DockPanel>
         <!--Top panel-->
         <DockPanel DockPanel.Dock="Top">
 
@@ -43,13 +30,25 @@
                     <Button Content="Edit in dialog" Command="{Binding EditPersonDialogCommand}" />
                 </StackPanel>
 
-                <ContentPresenter Content="{Binding SelectedPersonViewModel}"/>
+                <ContentPresenter Content="{Binding SelectedPersonViewModel}" Margin="0,5,0,0"/>
+            </DockPanel>
+        </DockPanel>
+
+        <!--Bottom panel-->
+        <DockPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
+
+            <!--Right bottom panel-->
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+            </StackPanel>
+
+            <!--Main bottom panel-->
+            <DockPanel>
+                <Button Content="Navigate products" Command="{Binding NavigateProductsCommand}" />
             </DockPanel>
         </DockPanel>
 
         <!--Main panel-->
         <DockPanel Margin="0,5,0,0">
-            <Button Content="Navigate products" Command="{Binding NavigateProductsCommand}" />
         </DockPanel>
     </DockPanel>
 </UserControl>
