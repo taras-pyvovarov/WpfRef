@@ -6,18 +6,23 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
     
     <DockPanel>
-        <StackPanel DockPanel.Dock="Bottom">
-            <TextBlock Text="Test buttons:"/>
-            <Button Content="Pass EventArgs">
+        <StackPanel DockPanel.Dock="Bottom" Margin="5">
+            <TextBlock Text="Actions:" FontSize="16" FontWeight="SemiBold"/>
+
+            <Button Content="Add" Command="{Binding AddPersonCommand}" Margin="0,5,0,0"/>
+            <Button Content="Delete" Command="{Binding DeletePersonCommand}" Margin="0,5,0,0"/>
+
+            <TextBlock Text="Test buttons:" Margin="0,5,0,0" FontSize="16" FontWeight="SemiBold"/>
+            
+            <Button Content="Pass EventArgs" Margin="0,5,0,0">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <prism:InvokeCommandAction Command="{Binding PassEventParamsCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=InvokeParameter}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-
-            <Button Content="Blank long" Command="{Binding BlankLongCommand}"/>
-            <Button Content="Blank long async" Command="{Binding BlankLongAsyncCommand}"/>
+            <Button Content="Blank long" Command="{Binding BlankLongCommand}" Margin="0,5,0,0"/>
+            <Button Content="Blank long async" Command="{Binding BlankLongAsyncCommand}" Margin="0,5,0,0"/>
         </StackPanel>
 
         <ListBox ItemsSource="{Binding People}" SelectedItem="{Binding SelectedPerson}">

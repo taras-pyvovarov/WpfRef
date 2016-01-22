@@ -48,7 +48,6 @@ namespace Module.People.ViewModels
         {
             ApplyEditCommand = new DelegateCommand(ApplyEditExecute, ApplyEditCanExecute);
             CancelEditCommand = new DelegateCommand(CancelEditExecute);
-            ValidationErrorsChanged = () => EvaluateApplyEditCanExecute();
         }
 
         #region Command executes
@@ -74,9 +73,12 @@ namespace Module.People.ViewModels
 
         #endregion Command executes
 
-        private void EvaluateApplyEditCanExecute()
+        protected override void ValidationErrorsChanged()
         {
-            ApplyEditCommand.RaiseCanExecuteChanged();
+            base.ValidationErrorsChanged();
+
+            if (ApplyEditCommand != null)
+                ApplyEditCommand.RaiseCanExecuteChanged();
         }
 
         private void RaiseEvent(EventHandler eventToRaise)

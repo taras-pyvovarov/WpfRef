@@ -17,7 +17,6 @@ namespace Module.People.ViewModels
     public class PersonViewModel : BindableBase, INotifyDataErrorInfo
     {
         protected readonly Dictionary<string, string[]> ValidationErrors = new Dictionary<string, string[]>();
-        protected Action ValidationErrorsChanged;
         private readonly IValidationService _validationService;
 
         public Person Model { get; private set; }
@@ -75,6 +74,10 @@ namespace Module.People.ViewModels
                 ValidationErrors.Remove(validatedPropertyName);
             RaiseErrorsChanged(validatedPropertyName);
             Application.Current.Dispatcher.Invoke(ValidationErrorsChanged);
+        }
+
+        protected virtual void ValidationErrorsChanged()
+        {
         }
 
         #region INotifyDataErrorInfo implementation

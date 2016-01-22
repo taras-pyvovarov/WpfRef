@@ -7,6 +7,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Events;
 using Module.People.PubSubEvents;
+using Presentation.GlobalPubSubEvents;
 
 namespace Module.People.ViewModels
 {
@@ -98,6 +99,7 @@ namespace Module.People.ViewModels
             IValidationService validationService = _container.Resolve<IValidationService>();
             var editPersonViewModel = new EditPersonViewModel(SelectedPerson, validationService);
             SelectedPersonViewModel = editPersonViewModel;
+            _eventAggregator.GetEvent<UserActionHappenedEvent>().Publish("Person edit view switched");
         }
 
         private void EditPersonDialogExecute()
@@ -110,6 +112,8 @@ namespace Module.People.ViewModels
                 editPersonViewModel_EditApplied(editPersonViewModel, EventArgs.Empty);
             else
                 editPersonViewModel_EditCanceled(editPersonViewModel, EventArgs.Empty);
+
+            _eventAggregator.GetEvent<UserActionHappenedEvent>().Publish("Person edit dialog opened");
         }
 
         private bool PersonActionCanExecute()
@@ -126,17 +130,20 @@ namespace Module.People.ViewModels
 
         #endregion Command executes
 
-        private void PersonSelectionChanged(Person person)
+        private void PersonSelectionChanged(Tuple<Person, bool> payload)
         {
-            if (person == null)
+            if (payload.Item1 == null)
             {
                 SelectedPersonViewModel = null;
                 SelectedPerson = null;
                 return;
             }
 
-            SelectedPerson = person;
-            SelectedPersonViewModel = new PersonViewModel(SelectedPerson);
+            SelectedPerson = payload.Item1;
+            if (payload.Item2)
+                SelectedPersonViewModel = new EditPersonViewModel(SelectedPerson, _container.Resolve<IValidationService>());
+            else
+                SelectedPersonViewModel = new PersonViewModel(SelectedPerson);
         }
 
         private void editPersonViewModel_EditApplied(object sender, EventArgs e)
@@ -145,12 +152,14 @@ namespace Module.People.ViewModels
             SelectedPersonViewModel = new PersonViewModel(senderVM.Model);
 
             _eventAggregator.GetEvent<PersonChangedEvent>().Publish(SelectedPerson);
+            _eventAggregator.GetEvent<UserActionHappenedEvent>().Publish("Person edit applied");
         }
 
         private void editPersonViewModel_EditCanceled(object sender, EventArgs e)
         {
             EditPersonViewModel senderVM = (EditPersonViewModel)sender;
             SelectedPersonViewModel = new PersonViewModel(senderVM.Model);
+            _eventAggregator.GetEvent<UserActionHappenedEvent>().Publish("Person edit canceled");
         }
     }
 }

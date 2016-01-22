@@ -31,11 +31,27 @@ namespace Module.People.ViewModels
             set 
             { 
                 SetProperty(ref this._selectedPerson, value);
-                _eventAggregator.GetEvent<PersonSelectionChangedEvent>().Publish(_selectedPerson.Model);
+                DeletePersonCommand.RaiseCanExecuteChanged();
+                _eventAggregator.GetEvent<PersonSelectionChangedEvent>().Publish(new Tuple<Person, bool>(_selectedPerson?.Model, false));
+
             }
         }
 
         #region Commands
+
+        public DelegateCommand _addPersonCommand;
+        public DelegateCommand AddPersonCommand
+        {
+            get { return _addPersonCommand; }
+            set { SetProperty(ref _addPersonCommand, value); }
+        }
+
+        public DelegateCommand _deletePersonCommand;
+        public DelegateCommand DeletePersonCommand
+        {
+            get { return _deletePersonCommand; }
+            set { SetProperty(ref _deletePersonCommand, value); }
+        }
 
         public ICommand _blankLongCommand;
         public ICommand BlankLongCommand
@@ -66,6 +82,8 @@ namespace Module.People.ViewModels
 
             _eventAggregator.GetEvent<PersonChangedEvent>().Subscribe(PersonChanged);
 
+            AddPersonCommand = new DelegateCommand(AddPersonExecute);
+            DeletePersonCommand = new DelegateCommand(DeletePersonExecute, DeletePersonCanExecute);
             BlankLongCommand = new DelegateCommand(BlankLongExecute);
             BlankLongAsyncCommand = DelegateCommand.FromAsyncHandler(BlankLongAsyncExecute);
             PassEventParamsCommand = new DelegateCommand<EventArgs>(PassEventParamsExecute);
@@ -75,6 +93,23 @@ namespace Module.People.ViewModels
         }
 
         #region Command executes
+
+        private void AddPersonExecute()
+        {
+            var newPerson = new Person(string.Empty, string.Empty, string.Empty);
+            _eventAggregator.GetEvent<PersonSelectionChangedEvent>().Publish(new Tuple<Person, bool>(newPerson, true));
+        }
+
+        private bool DeletePersonCanExecute()
+        {
+            return SelectedPerson != null;
+        }
+
+        private void DeletePersonExecute()
+        {
+            People.Remove(SelectedPerson);
+            _eventAggregator.GetEvent<UserActionHappenedEvent>().Publish("Person was removed");
+        }
 
         private void BlankLongExecute()
         {
@@ -97,8 +132,15 @@ namespace Module.People.ViewModels
 
         private void PersonChanged(Person person)
         {
-            PersonListItemViewModel personViewModel = People.Single(x => x.Model == person);
-            PersonListItemViewModel.ConvertModelToViewModel(person, personViewModel);
+            PersonListItemViewModel existingPersonViewModel = People.SingleOrDefault(x => x.Model == person);
+            if (existingPersonViewModel != null)
+                PersonListItemViewModel.ConvertModelToViewModel(person, existingPersonViewModel);
+            else
+            {
+                People.Add(new PersonListItemViewModel(person));
+                _eventAggregator.GetEvent<UserActionHappenedEvent>().Publish("New person added");
+            }
+                
         }
 
         private void HeavyOperation()

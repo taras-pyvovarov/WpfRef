@@ -22,7 +22,8 @@ namespace People.Domain
                 }
             }
 
-            if (!char.IsUpper(nameToValidate.First()))
+            char firstChar = nameToValidate.FirstOrDefault();
+            if (firstChar != default(char) && !char.IsUpper(firstChar))
                 errors.Add("Name should start with uppercase letter");
             return errors.ToArray();
         }
