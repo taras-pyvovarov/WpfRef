@@ -1,6 +1,6 @@
-﻿using People.Domain;
+﻿using System;
+using People.Domain;
 using Prism.Events;
-using System;
 
 namespace Module.People.PubSubEvents
 {

@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Windows.Input;
+using Common;
 using Common.Interfaces;
 using Microsoft.Practices.Unity;
-using People.Domain;
-using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Events;
 using Module.People.PubSubEvents;
+using People.Domain;
 using Presentation.GlobalPubSubEvents;
+using Prism.Commands;
+using Prism.Events;
+using Prism.Mvvm;
 using Prism.Regions;
-using Common;
 
 namespace Module.People.ViewModels
 {

@@ -1,14 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using Common;
+using Common.Interfaces;
 using Microsoft.Practices.Unity;
 using Module.People.ViewModels;
 using Module.People.Views;
+using People.Domain;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
-using System.Collections.Generic;
-using Common.Interfaces;
-using People.Domain;
 
 namespace Module.People
 {

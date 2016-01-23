@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Threading.Tasks;
 using Common.Interfaces;
 using People.Domain;
-using Prism.Mvvm;
-using System.Windows.Input;
 using Prism.Commands;
-using System.Windows.Threading;
-using System.Windows;
 
 namespace Module.People.ViewModels
 {

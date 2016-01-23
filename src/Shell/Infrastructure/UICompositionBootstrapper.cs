@@ -1,9 +1,9 @@
 ﻿using System.Windows;
-using Shell.Views;
-using Prism.Modularity;
-using Prism.Unity;
 using Common.Interfaces;
 using Microsoft.Practices.Unity;
+using Prism.Modularity;
+using Prism.Unity;
+using Shell.Views;
 
 namespace Shell
 {

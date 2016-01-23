@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Module.People.PubSubEvents;
 using People.Domain;
+using Presentation.GlobalPubSubEvents;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
-using Module.People.PubSubEvents;
-using Presentation.GlobalPubSubEvents;
-using System.Linq;
 
 namespace Module.People.ViewModels
 {
